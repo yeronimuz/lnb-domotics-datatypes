@@ -1,18 +1,13 @@
 package com.lankheet.iot.datatypes;
 
-import java.time.LocalDateTime;
-
+import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,8 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * retrieved manually from the web service (until an automated system is
  * created).
  */
-@Entity
-@Table(name = "measurements")
+@Entity(name = "measurements")
 public class Measurement {
 
 	@Id
@@ -31,16 +25,15 @@ public class Measurement {
 	private int id;
 
 	@JsonProperty
-	@JoinColumn(name = "Sensor.id")
+	@JoinColumn(name = "sensor.id")
 	private int sensorId;
 
 	@JsonProperty
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private LocalDateTime timeStamp;
+	private Date timeStamp;
 
 	@JsonProperty
-	@Enumerated(EnumType.ORDINAL)
-	private MeasurementType type;
+	private Integer type;
 
 	@JsonProperty
 	private double value;
@@ -52,8 +45,8 @@ public class Measurement {
 	}
 
 	@JsonCreator
-	public Measurement(@JsonProperty("sensorId") int sensorId, @JsonProperty("timeStamp") LocalDateTime timeStamp,
-			@JsonProperty("type") MeasurementType type, @JsonProperty("value") double value) {
+	public Measurement(@JsonProperty("sensorId") int sensorId, @JsonProperty("timeStamp") Date timeStamp,
+			@JsonProperty("type") Integer type, @JsonProperty("value") double value) {
 		this.sensorId = sensorId;
 		this.type = type;
 		this.timeStamp = timeStamp;
@@ -64,11 +57,15 @@ public class Measurement {
 		return sensorId;
 	}
 
-	public MeasurementType getType() {
-		return type;
+	public Integer getType() {
+	    return type;
+	}
+	
+	public void setMeasurementType(Integer type) {
+	    this.type = type;
 	}
 
-	public LocalDateTime getTimeStamp() {
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
