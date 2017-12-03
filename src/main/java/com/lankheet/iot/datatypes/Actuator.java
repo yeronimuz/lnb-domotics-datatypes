@@ -21,50 +21,10 @@
 
 package com.lankheet.iot.datatypes;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /**
- * A sensor is the origin of a measurement.<BR>
- * Currently, a sensor may be a combined sensor. We do not model this.<BR>
- * A measurement of different types can come from one sensor.
+ * Entity that is able to control peripherals at a Location.<BR>
+ * Actuator is always regarded separately from a Sensor, even when combined in one case.
  */
-@Entity
-public class Sensor {
+public class Actuator {
 
-    @Id
-    private int id;
-
-    /** reference to SensorType.id */
-    private Integer type;
-
-    private String name;
-
-    private String description;
-
-    /** Default constructor required for JPA */
-    public Sensor() {}
-
-    public Sensor(Integer type, String name, String description) {
-        super();
-        this.type = type;
-        this.name = name;
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public SensorType getType() {
-        return SensorType.getType(this.type);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 }
