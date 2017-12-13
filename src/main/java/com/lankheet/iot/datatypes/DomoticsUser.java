@@ -21,6 +21,7 @@
 
 package com.lankheet.iot.datatypes;
 
+import java.security.Principal;
 import java.util.List;
 import javax.management.relation.Role;
 import javax.persistence.Convert;
@@ -36,7 +37,7 @@ import com.lankheet.iot.crypto.CryptoConverter;
  * User in the domotics service.
  */
 @Entity
-public class DomoticsUser {
+public class DomoticsUser implements Principal {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +56,12 @@ public class DomoticsUser {
     
     public DomoticsUser() {
         // For JPA
+    }
+    
+    public DomoticsUser(String userName, String passWord) {
+        this.userName = userName;
+        this.password = passWord;
+        // TODO: Location
     }
 
     /**
@@ -127,5 +134,10 @@ public class DomoticsUser {
      */
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String getName() {
+        return getUserName();
     }
 }

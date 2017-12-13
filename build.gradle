@@ -18,7 +18,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'com.lankheet.iot'
             // artifactId 'project1-sample'
-            version '0.2'
+            version project.version
 
             from components.java
         }
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.4'
+    compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.1'

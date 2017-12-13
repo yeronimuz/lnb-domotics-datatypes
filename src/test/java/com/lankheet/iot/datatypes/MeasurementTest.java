@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.lankheet.utils.JsonUtil;
 
 public class MeasurementTest {
-//	private static final Logger LOG = LogManager.getLogger(MeasurementTest.class);
+//	private static final Logger LOG = LoggerFactory.getLogger(MeasurementTest.class);
 
 	@Test
 	public void test() throws JsonParseException, JsonMappingException, IOException {
