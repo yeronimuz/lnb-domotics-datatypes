@@ -48,10 +48,10 @@ public class DomoticsUser implements Principal {
     @Convert(converter = CryptoConverter.class)
     private String password;
     
-    @ManyToMany(mappedBy="id")
-    private List<Location> location;
+    @ManyToMany(mappedBy="users")
+    private List<Location> locations;
     
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "user")
     private List<Role> roles;
     
     public DomoticsUser() {
@@ -61,7 +61,7 @@ public class DomoticsUser implements Principal {
     public DomoticsUser(String userName, String passWord) {
         this.userName = userName;
         this.password = passWord;
-        // TODO: Location
+        // TODO: Locations
     }
 
     /**
@@ -109,7 +109,7 @@ public class DomoticsUser implements Principal {
      * @return the location
      */
     public List<Location> getLocation() {
-        return location;
+        return locations;
     }
 
     /**
@@ -117,7 +117,7 @@ public class DomoticsUser implements Principal {
      * @param location the location to set
      */
     public void setLocation(List<Location> location) {
-        this.location = location;
+        this.locations = location;
     }
 
     /**

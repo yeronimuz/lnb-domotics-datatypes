@@ -23,6 +23,8 @@ package com.lankheet.iot.datatypes;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A sensor is the origin of a measurement.<BR>
@@ -33,38 +35,95 @@ import javax.persistence.Id;
 public class Sensor {
 
     @Id
+    @JsonProperty
     private int id;
 
     /** reference to SensorType.id */
+    // @JsonProperty
     private Integer type;
 
+    @JsonProperty
     private String name;
 
+    @JsonProperty
     private String description;
+
+    @ManyToOne
+    @JsonProperty
+    private Location location;
 
     /** Default constructor required for JPA */
     public Sensor() {}
 
-    public Sensor(Integer type, String name, String description) {
+    /**
+     * Constructor.
+     * 
+     * @param id The sensor id
+     * @param type The type of sensor (SensorType)
+     * @param name The name of this sensor
+     * @param description A description (brand, model)
+     */
+    public Sensor(@JsonProperty("id") int id, @JsonProperty("type") Integer type, @JsonProperty("name") String name,
+            @JsonProperty("description") String description) {
         super();
+        this.id = id;
         this.type = type;
         this.name = name;
         this.description = description;
     }
 
+    /**
+     * Get the id.
+     * 
+     * @return the unique id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Get the type.
+     * 
+     * @return The type of the sensor (enum)
+     */
+    @JsonProperty
     public SensorType getType() {
         return SensorType.getType(this.type);
     }
 
+    /**
+     * Get the name of this sensor.
+     * 
+     * @return The name of this sensor
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the brand and model of this sensor description.
+     * 
+     * @return description
+     */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Get the location of this sensor
+     * 
+     * @return location
+     */
+    public Location getLocation() {
+        return location;
+    }
+
+    /**
+     * Set location.
+     * 
+     * @param location The location of this sensor
+     */
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

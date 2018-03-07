@@ -24,12 +24,34 @@ package com.lankheet.iot.datatypes;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * User role; what may a user do.<BR>
  * A user may have more roles. Each role can be configured for CRUD and control actions.
  */
 public class Role {
+    /** Permission to read location data */
+    public static final int ROLE_PERMISSION_READ_FLAG = 0x1;
+
+    /** Permission to write location data; new measurements, create users, sensors, actuators */
+    public static final int ROLE_PERMISSION_WRITE_FLAG = 0x2;
+
+    /** Permission to delete configuration items */
+    public static final int ROLE_PERMISSION_DELETE_FLAG = 0x4;
+
+    /** Permission to modify Location's settings */
+    public static final int ROLE_PERMISSION_MODIFY_FLAG = 0x8;
+
+    /** Permission to control actuators */
+    public static final int ROLE_PERMISSION_CONTROL_FLAG = 0x10;
+
+    public static final int ROLE_PERMISSION_RESERVED1_FLAG = 0x20;
+
+    public static final int ROLE_PERMISSION_RESERVED2_FLAG = 0x40;
+
+    /** This role has admin permissions */
+    public static final int ROLE_PERMISSION_ADMIN_FLAG = 0x80;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,19 +61,10 @@ public class Role {
     private String name;
 
     /** A user may or may not read */
-    private boolean read;
+    private int permissionFlags;
 
-    /** A user may or may not write (add other user) */
-    private boolean write;
-
-    /** A user may or may not delete */
-    private boolean delete;
-
-    /** A user may or may not modify Location's settings */
-    private boolean modify;
-
-    /** A user may or may not control actuators */
-    private boolean control;
+    @ManyToOne
+    private String user;
 
     public Role() {
         // For JPA
@@ -67,18 +80,23 @@ public class Role {
      * @param modify permissions to modify sensors, location
      * @param control Permission to control actuators, create switching patterns
      */
-    public Role(String name, boolean read, boolean write, boolean delete, boolean modify, boolean control) {
+    public Role(String name) {
         super();
         this.name = name;
-        this.read = read;
-        this.write = write;
-        this.delete = delete;
-        this.modify = modify;
-        this.control = control;
+    }
+
+    /**
+     * Get id.
+     * 
+     * @return the id
+     */
+    public int getId() {
+        return id;
     }
 
     /**
      * Get name.
+     * 
      * @return the name
      */
     public String getName() {
@@ -87,6 +105,7 @@ public class Role {
 
     /**
      * Set name.
+     * 
      * @param name the name to set
      */
     public void setName(String name) {
@@ -94,90 +113,105 @@ public class Role {
     }
 
     /**
-     * Get read.
+     * Get read permission.
+     * 
      * @return the read
      */
-    public boolean isRead() {
-        return read;
+    public boolean isReadPermissionSet() {
+        return (permissionFlags & ROLE_PERMISSION_READ_FLAG) == ROLE_PERMISSION_READ_FLAG;
     }
 
     /**
-     * Set read.
+     * Set read permission.
+     * 
      * @param read the read to set
      */
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setReadPermission(boolean read) {
+        this.permissionFlags =
+                (read) ? (permissionFlags | ROLE_PERMISSION_READ_FLAG) : (permissionFlags & ~ROLE_PERMISSION_READ_FLAG);
     }
 
     /**
-     * Get write.
+     * Get write permission status.
+     * 
      * @return the write
      */
-    public boolean isWrite() {
-        return write;
+    public boolean isWritePermissionSet() {
+        return (permissionFlags & ROLE_PERMISSION_WRITE_FLAG) == ROLE_PERMISSION_WRITE_FLAG;
     }
 
     /**
-     * Set write.
+     * Set write permission.
+     * 
      * @param write the write to set
      */
-    public void setWrite(boolean write) {
-        this.write = write;
+    public void setWritePermission(boolean write) {
+        this.permissionFlags = (write) ? (permissionFlags | ROLE_PERMISSION_WRITE_FLAG)
+                : (permissionFlags & ~ROLE_PERMISSION_WRITE_FLAG);
     }
 
     /**
-     * Get delete.
+     * Get delete permission flag value.
+     * 
      * @return the delete
      */
-    public boolean isDelete() {
-        return delete;
+    public boolean isDeletePermissionSet() {
+        return (permissionFlags & ROLE_PERMISSION_DELETE_FLAG) == ROLE_PERMISSION_DELETE_FLAG;
     }
 
     /**
      * Set delete.
+     * 
      * @param delete the delete to set
      */
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setDeletePermission(boolean delete) {
+        this.permissionFlags = (delete) ? (permissionFlags | ROLE_PERMISSION_DELETE_FLAG)
+                : (permissionFlags & ~ROLE_PERMISSION_DELETE_FLAG);
     }
 
     /**
      * Get modify.
+     * 
      * @return the modify
      */
-    public boolean isModify() {
-        return modify;
+    public boolean isModifyPermissionSet() {
+        return (permissionFlags & ROLE_PERMISSION_MODIFY_FLAG) == ROLE_PERMISSION_MODIFY_FLAG;
     }
 
     /**
      * Set modify.
+     * 
      * @param modify the modify to set
      */
-    public void setModify(boolean modify) {
-        this.modify = modify;
+    public void setModifyPermission(boolean modify) {
+        this.permissionFlags = (modify) ? (permissionFlags | ROLE_PERMISSION_MODIFY_FLAG)
+                : (permissionFlags & ~ROLE_PERMISSION_MODIFY_FLAG);
     }
 
     /**
      * Get control.
+     * 
      * @return the control
      */
-    public boolean isControl() {
-        return control;
+    public boolean isControlPermissionSet() {
+        return (permissionFlags & ROLE_PERMISSION_CONTROL_FLAG) == ROLE_PERMISSION_CONTROL_FLAG;
     }
 
     /**
      * Set control.
+     * 
      * @param control the control to set
      */
-    public void setControl(boolean control) {
-        this.control = control;
+    public void setControlPermission(boolean control) {
+        this.permissionFlags = (control) ? (permissionFlags | ROLE_PERMISSION_CONTROL_FLAG)
+                : (permissionFlags & ~ROLE_PERMISSION_CONTROL_FLAG);
     }
-
+    
     /**
-     * Get id.
-     * @return the id
+     * Get all the flags.
+     * @return The permission flags
      */
-    public int getId() {
-        return id;
+    public int getPermissionFlags() {
+        return permissionFlags;
     }
 }

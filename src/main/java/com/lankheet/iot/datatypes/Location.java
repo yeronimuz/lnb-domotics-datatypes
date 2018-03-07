@@ -41,17 +41,17 @@ public class Location {
     /** User defined free text */
     String locationText;
 
-    /** All users that have access to location data */
-    @ManyToMany(mappedBy = "id")
-    List<DomoticsUser> userList;
+    /** All users that have access to a location's data */
+    @ManyToMany(mappedBy = "locations")
+    List<DomoticsUser> users;
 
     /** All sensors in this location */
-    @OneToMany(mappedBy = "id")
-    List<Sensor> sensorList;
+    @OneToMany(mappedBy = "location")
+    List<Sensor> sensors;
 
     /** All actuators in this location */
-    @OneToMany(mappedBy = "id")
-    List<Actuator> actuatorList;
+    @OneToMany(mappedBy = "location")
+    List<Actuator> actuators;
     
     public Location() {
         // required for JPA
@@ -78,7 +78,7 @@ public class Location {
      * @return the userList
      */
     public List<DomoticsUser> getUserList() {
-        return userList;
+        return users;
     }
 
     /**
@@ -86,7 +86,7 @@ public class Location {
      * @param userList the userList to set
      */
     public void setUserList(List<DomoticsUser> userList) {
-        this.userList = userList;
+        this.users = userList;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Location {
      * @return the sensorList
      */
     public List<Sensor> getSensorList() {
-        return sensorList;
+        return sensors;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Location {
      * @param sensorList the sensorList to set
      */
     public void setSensorList(List<Sensor> sensorList) {
-        this.sensorList = sensorList;
+        this.sensors = sensorList;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Location {
      * @return the actuatorList
      */
     public List<Actuator> getActuatorList() {
-        return actuatorList;
+        return actuators;
     }
 
     /**
@@ -118,7 +118,7 @@ public class Location {
      * @param actuatorList the actuatorList to set
      */
     public void setActuatorList(List<Actuator> actuatorList) {
-        this.actuatorList = actuatorList;
+        this.actuators = actuatorList;
     }
 
     /**
