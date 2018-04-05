@@ -19,11 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
+
+import javax.persistence.Entity;
 
 /**
  * The types of measurements in P1 datagram
  */
+@Entity
 public enum MeasurementType {
 	// From SmartMeter
 	PRODUCED_POWER_T1(1, "Produced power T1", "kW"), 

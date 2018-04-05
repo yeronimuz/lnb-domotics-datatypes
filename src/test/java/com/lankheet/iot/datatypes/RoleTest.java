@@ -3,6 +3,7 @@ package com.lankheet.iot.datatypes;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
+import com.lankheet.iot.datatypes.entities.Role;
 
 public class RoleTest {
 

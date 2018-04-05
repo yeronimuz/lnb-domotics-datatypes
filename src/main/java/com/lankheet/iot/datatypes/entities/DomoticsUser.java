@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
 
 import java.security.Principal;
 import java.util.List;

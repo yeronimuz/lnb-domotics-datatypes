@@ -8,7 +8,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId 'com.lankheet.iot'
-            // artifactId 'project1-sample'
+            artifactId 'datatypes'
             version project.version
 
             from components.java
@@ -22,15 +22,13 @@ repositories {
 
 ext {
     junitVersion = '4.+'
-    slf4jVersion = '1.7.25'
     jmockitVersion = '1.35'
     jacksonVersion = '2.8.1'
     hibernateVersion = '5.2.10.Final'
 }
 
 dependencies {
-    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: slf4jVersion
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile group: 'com.fasterxml.jackson.core', name:'jackson-core', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.core', name:'jackson-databind', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jacksonVersion
@@ -41,5 +39,3 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: junitVersion
     testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
 }
-
-

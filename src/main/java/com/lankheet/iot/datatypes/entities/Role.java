@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -74,11 +74,6 @@ public class Role {
      * Constructor.
      * 
      * @param name The name of the role
-     * @param read Reading permissions on measurements, sensors and location
-     * @param write Writing permissions on measurements, sensors and location
-     * @param delete permissions on measurements, sensors and location
-     * @param modify permissions to modify sensors, location
-     * @param control Permission to control actuators, create switching patterns
      */
     public Role(String name) {
         super();

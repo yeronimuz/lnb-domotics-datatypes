@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.lankheet.iot.datatypes.entities.Measurement;
+import com.lankheet.iot.datatypes.entities.MeasurementType;
 import com.lankheet.utils.JsonUtil;
 
 public class MeasurementTest {
@@ -17,7 +19,7 @@ public class MeasurementTest {
     @Test
     public void test() throws JsonParseException, JsonMappingException, IOException {
         Date now = new Date();
-        Measurement meas = new Measurement(1, now, MeasurementType.CONSUMED_GAS.getId(), 2.0);
+        Measurement meas = new Measurement(1, now, MeasurementType.CONSUMED_GAS, 2.0);
         String jsonMeasurement = JsonUtil.toJson(meas);
         LOG.info(jsonMeasurement);
 

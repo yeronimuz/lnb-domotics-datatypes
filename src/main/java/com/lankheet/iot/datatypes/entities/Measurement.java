@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
 
 import java.util.Date;
 import javax.persistence.Entity;
@@ -29,8 +29,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A Measurement is a single information item that is produced by the LNB domotics system. The id
@@ -43,18 +41,14 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-	@JsonProperty
-	@JoinColumn(name = "sensor.id")
-	private int sensorId;
+    @JoinColumn(name = "sensor.id")
+    private int sensorId;
 
-    @JsonProperty
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date timeStamp;
 
-    @JsonProperty
-    private Integer type;
+    private MeasurementType measurementType;
 
-    @JsonProperty
     private double value;
 
     /**
@@ -70,38 +64,36 @@ public class Measurement {
      * @param type Type of measurement as known in database
      * @param value The value of the measurement
      */
-	@JsonCreator
-	public Measurement(@JsonProperty("sensorId") int sensorId, @JsonProperty("timeStamp") Date timeStamp,
-			@JsonProperty("type") Integer type, @JsonProperty("value") double value) {
-		this.sensorId = sensorId;
-		this.type = type;
-		this.timeStamp = timeStamp;
-		this.value = value;
-	}
-
-	public int getSensorId() {
-		return sensorId;
-	}
-
-    public Integer getType() {
-        return type;
+    public Measurement(int sensorId, Date timeStamp, MeasurementType measurementType, double value) {
+        this.sensorId = sensorId;
+        this.measurementType = measurementType;
+        this.timeStamp = timeStamp;
+        this.value = value;
     }
 
-    public void setMeasurementType(Integer type) {
-        this.type = type;
+    public int getSensorId() {
+        return sensorId;
+    }
+
+    public MeasurementType getType() {
+        return measurementType;
+    }
+
+    public void setMeasurementType(MeasurementType measurementType) {
+        this.measurementType = measurementType;
     }
 
     public Date getTimeStamp() {
         return timeStamp;
     }
-    
+
     public double getValue() {
         return value;
     }
 
-	@Override
-	public String toString() {
-		return "Measurement [sensorId=" + sensorId + ", timeStamp=" + timeStamp + ", type=" + type + ", value=" + value
-				+ "]";
-	}
+    @Override
+    public String toString() {
+        return "Measurement [sensorId=" + sensorId + ", timeStamp=" + timeStamp + ", type=" + measurementType
+                + ", value=" + value + "]";
+    }
 }

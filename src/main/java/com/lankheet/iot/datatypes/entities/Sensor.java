@@ -19,37 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.OneToOne;
 
 /**
  * A sensor is the origin of a measurement.<BR>
  * Currently, a sensor may be a combined sensor. We do not model this.<BR>
  * A measurement of different types can come from one sensor.
  */
-@Entity
+@Entity(name = "sensors")
 public class Sensor {
 
     @Id
-    @JsonProperty
     private int id;
 
     /** reference to SensorType.id */
-    // @JsonProperty
-    private Integer type;
+    @OneToOne(mappedBy = "sensorType.id")
+    private SensorType sensorType;
+    
+    private String macAddress;
 
-    @JsonProperty
     private String name;
 
-    @JsonProperty
     private String description;
 
     @ManyToOne
-    @JsonProperty
     private Location location;
 
     /** Default constructor required for JPA */
@@ -59,15 +57,13 @@ public class Sensor {
      * Constructor.
      * 
      * @param id The sensor id
-     * @param type The type of sensor (SensorType)
+     * @param sensorType The type of sensor (SensorType)
      * @param name The name of this sensor
      * @param description A description (brand, model)
      */
-    public Sensor(@JsonProperty("id") int id, @JsonProperty("type") Integer type, @JsonProperty("name") String name,
-            @JsonProperty("description") String description) {
-        super();
+    public Sensor(int id, SensorType sensorType, String name, String description) {
         this.id = id;
-        this.type = type;
+        this.sensorType = sensorType;
         this.name = name;
         this.description = description;
     }
@@ -86,9 +82,8 @@ public class Sensor {
      * 
      * @return The type of the sensor (enum)
      */
-    @JsonProperty
     public SensorType getType() {
-        return SensorType.getType(this.type);
+        return sensorType;
     }
 
     /**
@@ -125,5 +120,21 @@ public class Sensor {
      */
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    /**
+     * Get macAddress.
+     * @return the macAddress
+     */
+    public String getMacAddress() {
+        return macAddress;
+    }
+
+    /**
+     * Set macAddress.
+     * @param macAddress the macAddress to set
+     */
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
     }
 }

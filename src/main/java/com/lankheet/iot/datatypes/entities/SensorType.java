@@ -19,23 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
 
-import java.io.IOException;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 /**
  * Sensor types.
  */
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
-@JsonDeserialize(using = SensorType.SensorTypeDeserializer.class)
+@Entity
 public enum SensorType {
     TEMPERATURE(1, "temperature"),
     HUMIDITY(2, "humidity"),
@@ -76,30 +68,5 @@ public enum SensorType {
             }
         }
         return returnType;
-    }
-
-    public static class SensorTypeDeserializer extends StdDeserializer<SensorType> {
-
-        private static final long serialVersionUID = 1L;
-
-        protected SensorTypeDeserializer() {
-            super(SensorType.class);
-        }
-        
-        @Override
-        public SensorType deserialize(JsonParser jasonParser, DeserializationContext deserializationContext)
-                throws IOException, JsonProcessingException {
-            final JsonNode jsonNode = jasonParser.readValueAsTree();
-            String id = jsonNode.get("id").asText();
-            String name = jsonNode.get("description").asText();
-
-            for (SensorType sensorType : SensorType.values()) {
-                if (sensorType.getId().equals(id) && sensorType.getDescription().equals(name)) {
-                    return sensorType;
-                }
-            }
-            throw deserializationContext
-                    .mappingException("Cannot deserialize SensorType from id " + id + " and description " + name);
-        }
     }
 }
