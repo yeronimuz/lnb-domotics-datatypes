@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = 0.3
+version = '0.4-SNAPSHOT'
 
 publishing {
     publications {
@@ -29,11 +29,12 @@ ext {
 
 dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    testCompile group: 'org.apache.derby', name: 'derby', version: '10.14.1.0'
     compile group: 'com.fasterxml.jackson.core', name:'jackson-core', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.core', name:'jackson-databind', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jacksonVersion
     compile group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
-    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion
+//    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion
 
     testCompile group: 'org.jmockit', name: 'jmockit', version: jmockitVersion
     testCompile group: 'junit', name: 'junit', version: junitVersion

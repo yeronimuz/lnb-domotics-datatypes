@@ -21,12 +21,9 @@
 
 package com.lankheet.iot.datatypes.entities;
 
-import javax.persistence.Entity;
-
 /**
  * The types of measurements in P1 datagram
  */
-@Entity
 public enum MeasurementType {
 	// From SmartMeter
 	PRODUCED_POWER_T1(1, "Produced power T1", "kW"), 
@@ -41,7 +38,7 @@ public enum MeasurementType {
 	TEMPERATURE(8, "Temperature", "Deg.C"), 
 	HUMIDITY(9, "Humidity", "%"), 
 	CONSUMED_WATER(10, "water consumed", "m3"),
-    UNKNOWN(99, "sentinel", "none"),
+    UNKNOWN(99, "unknown", "none"),
     ;
 
 	int id;

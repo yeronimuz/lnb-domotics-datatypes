@@ -32,7 +32,7 @@ import javax.persistence.OneToMany;
 /**
  * A location represents a domotics site.
  */
-@Entity
+@Entity(name = "locations")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,19 +42,37 @@ public class Location {
     String locationText;
 
     /** All users that have access to a location's data */
-    @ManyToMany(mappedBy = "locations")
+    @ManyToMany
     List<DomoticsUser> users;
 
     /** All sensors in this location */
-    @OneToMany(mappedBy = "location")
+    @OneToMany
     List<Sensor> sensors;
 
     /** All actuators in this location */
-    @OneToMany(mappedBy = "location")
+    @OneToMany
     List<Actuator> actuators;
     
     public Location() {
         // required for JPA
+    }
+    
+    /**
+     * Constructor.
+     * 
+     * @param locationText Free text for the location.
+     */
+    public Location(String locationText) {
+        this.locationText = locationText;
+    }
+
+
+    /**
+     * Get id.
+     * @return the id
+     */
+    public int getId() {
+        return id;
     }
 
     /**
@@ -119,13 +137,5 @@ public class Location {
      */
     public void setActuatorList(List<Actuator> actuatorList) {
         this.actuators = actuatorList;
-    }
-
-    /**
-     * Get id.
-     * @return the id
-     */
-    public int getId() {
-        return id;
     }
 }

@@ -26,7 +26,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -41,8 +41,8 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JoinColumn(name = "sensor.id")
-    private int sensorId;
+    @ManyToOne
+    private Sensor sensor;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date timeStamp;
@@ -59,23 +59,27 @@ public class Measurement {
     /**
      * Constructor.
      * 
-     * @param sensorId Sensor id as stored in database
+     * @param sensor Sensor as stored in database
      * @param timeStamp The time of occurrence
      * @param type Type of measurement as known in database
      * @param value The value of the measurement
      */
-    public Measurement(int sensorId, Date timeStamp, MeasurementType measurementType, double value) {
-        this.sensorId = sensorId;
+    public Measurement(Sensor sensor, Date timeStamp, MeasurementType measurementType, double value) {
+        this.sensor = sensor;
         this.measurementType = measurementType;
         this.timeStamp = timeStamp;
         this.value = value;
     }
-
-    public int getSensorId() {
-        return sensorId;
+    
+    public int getId() {
+        return id;
     }
 
-    public MeasurementType getType() {
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public MeasurementType getMeasurementType() {
         return measurementType;
     }
 
@@ -91,9 +95,12 @@ public class Measurement {
         return value;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "Measurement [sensorId=" + sensorId + ", timeStamp=" + timeStamp + ", type=" + measurementType
-                + ", value=" + value + "]";
+        return "Measurement [id=" + id + ", sensor=" + sensor + ", timeStamp=" + timeStamp + ", measurementType="
+                + measurementType + ", value=" + value + "]";
     }
 }

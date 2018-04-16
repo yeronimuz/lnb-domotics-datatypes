@@ -22,9 +22,12 @@
 package com.lankheet.iot.datatypes.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  * A sensor is the origin of a measurement.<BR>
@@ -35,10 +38,9 @@ import javax.persistence.OneToOne;
 public class Sensor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    /** reference to SensorType.id */
-    @OneToOne(mappedBy = "sensorType.id")
     private SensorType sensorType;
     
     private String macAddress;
@@ -61,9 +63,9 @@ public class Sensor {
      * @param name The name of this sensor
      * @param description A description (brand, model)
      */
-    public Sensor(int id, SensorType sensorType, String name, String description) {
-        this.id = id;
+    public Sensor(SensorType sensorType, String macAddress, String name, String description) {
         this.sensorType = sensorType;
+        this.macAddress = macAddress;
         this.name = name;
         this.description = description;
     }
@@ -136,5 +138,14 @@ public class Sensor {
      */
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
+    }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Sensor [id=" + id + ", sensorType=" + sensorType + ", macAddress=" + macAddress + ", name=" + name
+                + ", description=" + description + ", location=" + location + "]";
     }
 }

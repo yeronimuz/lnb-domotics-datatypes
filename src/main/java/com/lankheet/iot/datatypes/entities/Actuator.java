@@ -22,6 +22,8 @@
 package com.lankheet.iot.datatypes.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -32,7 +34,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Actuator {
    @Id
-    private int id;
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
 
     @ManyToOne
     private Location location;
@@ -68,5 +71,4 @@ public class Actuator {
     public Location getLocation() {
         return location;
     }
-
 }

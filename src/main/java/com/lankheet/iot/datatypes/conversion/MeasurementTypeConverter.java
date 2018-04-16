@@ -19,54 +19,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.lankheet.iot.datatypes.entities;
+package com.lankheet.iot.datatypes.conversion;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import com.fasterxml.jackson.annotation.JsonValue;
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import com.lankheet.iot.datatypes.entities.MeasurementType;
 
 /**
- * Sensor types.
+ * Converter for storing MeasurementType enum as integer in the database and vice versa.
  */
-public enum SensorType {
-    TEMPERATURE(1, "temperature"),
-    HUMIDITY(2, "humidity"),
-    POWER_METER(3, "power_meter"),
-    GAS_METER(4, "gas_meter"),
-    GAS_SENSOR(5, "gas_sensor");
+@Converter(autoApply = true)
+public class MeasurementTypeConverter implements AttributeConverter<MeasurementType, Integer> {
 
-    private int id;
-
-    private String description;
-
-    private SensorType(int id, String name) {
-        this.id = id;
-        this.description = name;
+    @Override
+    public Integer convertToDatabaseColumn(MeasurementType type) {
+        return type.getId();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Get type by Id.
-     * 
-     * @param type The type.id to lookup.
-     * @return The SensorType that matches the type.id or null if not found
-     */
-    @JsonValue
-    public static SensorType getType(Integer type) {
-        SensorType returnType = null;
-        for (SensorType sensorType : SensorType.values()) {
-            if (type == sensorType.getId()) {
-                returnType = sensorType;
-                break;
-            }
-        }
-        return returnType;
+    @Override
+    public MeasurementType convertToEntityAttribute(Integer type) {
+        return MeasurementType.getType(type);
     }
 }

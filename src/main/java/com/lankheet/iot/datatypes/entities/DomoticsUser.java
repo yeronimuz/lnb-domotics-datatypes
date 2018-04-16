@@ -23,7 +23,6 @@ package com.lankheet.iot.datatypes.entities;
 
 import java.security.Principal;
 import java.util.List;
-import javax.management.relation.Role;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,20 +47,24 @@ public class DomoticsUser implements Principal {
     @Convert(converter = CryptoConverter.class)
     private String password;
     
-    @ManyToMany(mappedBy="users")
+    @ManyToMany
     private List<Location> locations;
     
-    @OneToMany(mappedBy = "user")
-    private List<Role> roles;
+    @OneToMany
+    private List<DomoticsRole> roles;
     
     public DomoticsUser() {
         // For JPA
     }
     
+    /**
+     * Constructor.
+     * @param userName user name
+     * @param passWord password, hashed
+     */
     public DomoticsUser(String userName, String passWord) {
         this.userName = userName;
         this.password = passWord;
-        // TODO: Locations
     }
 
     /**
@@ -108,7 +111,7 @@ public class DomoticsUser implements Principal {
      * Get location.
      * @return the location
      */
-    public List<Location> getLocation() {
+    public List<Location> getLocations() {
         return locations;
     }
 
@@ -116,15 +119,15 @@ public class DomoticsUser implements Principal {
      * Set location.
      * @param location the location to set
      */
-    public void setLocation(List<Location> location) {
-        this.locations = location;
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 
     /**
      * Get roles.
      * @return the roles
      */
-    public List<Role> getRoles() {
+    public List<DomoticsRole> getRoles() {
         return roles;
     }
 
@@ -132,7 +135,7 @@ public class DomoticsUser implements Principal {
      * Set roles.
      * @param roles the roles to set
      */
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<DomoticsRole> roles) {
         this.roles = roles;
     }
 
