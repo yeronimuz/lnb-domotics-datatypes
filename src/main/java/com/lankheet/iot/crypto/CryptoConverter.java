@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.lankheet.iot.crypto;
 
 import java.security.Key;
