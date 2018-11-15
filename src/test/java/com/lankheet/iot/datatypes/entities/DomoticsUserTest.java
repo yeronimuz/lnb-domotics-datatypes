@@ -44,7 +44,7 @@ public class DomoticsUserTest {
         entityManager.persist(domoticsUser);
         entityManager.getTransaction().commit();
 
-        TypedQuery<DomoticsUser> query = entityManager.createQuery("SELECT u FROM DomoticsUser u", DomoticsUser.class);
+        TypedQuery<DomoticsUser> query = entityManager.createQuery("SELECT u FROM users u", DomoticsUser.class);
         List<DomoticsUser> userList = query.getResultList();
         
         assertThat(userList.size(), is(1));
