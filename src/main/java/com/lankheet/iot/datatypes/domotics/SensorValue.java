@@ -25,6 +25,9 @@ public class SensorValue {
      * @param value The sensor value.
      */
     public SensorValue(SensorNode sensorNode, Date timeStamp, int measurementType, double value) {
+        if (sensorNode == null) {
+            throw new IllegalArgumentException("sensorNode may not be null");
+        }
         this.sensorNode = sensorNode;
         this.timeStamp = (Date) timeStamp.clone();
         this.measurementType = measurementType;
@@ -136,22 +139,20 @@ public class SensorValue {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        boolean returnValue = true;
         SensorValue other = (SensorValue) obj;
-        if (measurementType != other.measurementType)
-            return false;
-        if (sensorNode == null) {
-            if (other.sensorNode != null)
-                return false;
-        } else if (!sensorNode.equals(other.sensorNode))
-            return false;
-        if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value))
-            return false;
-        return true;
+        if (!equalsInType(obj) || (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value)) )
+            returnValue =  false;
+        return returnValue;
+    }
+    
+    public boolean equalsInType(Object obj) {
+        boolean returnValue = false;
+        SensorValue other = (SensorValue) obj;
+        if ((this == obj) || (getClass() == obj.getClass()) && (this.measurementType == other.measurementType)){
+            returnValue =  true;
+        } 
+        returnValue &= (other.sensorNode != null) && sensorNode.equals(other.sensorNode);
+        return returnValue;
     }
 }
