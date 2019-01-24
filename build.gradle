@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.4-FINAL'
+version = '0.5-SNAPSHOT'
 
 task sourceJar(type: Jar) {
     classifier 'sources'

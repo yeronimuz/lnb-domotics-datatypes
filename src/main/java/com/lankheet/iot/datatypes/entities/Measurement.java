@@ -1,6 +1,7 @@
 package com.lankheet.iot.datatypes.entities;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class Measurement {
     @Column(name = "id", updatable = false, nullable = false)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Sensor sensor;
 
     @Temporal(value = TemporalType.TIMESTAMP)
@@ -58,6 +59,10 @@ public class Measurement {
 
     public Sensor getSensor() {
         return sensor;
+    }
+    
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
 
     public MeasurementType getMeasurementType() {
