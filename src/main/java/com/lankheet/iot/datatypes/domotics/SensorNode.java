@@ -11,7 +11,6 @@ public class SensorNode {
 
     private String sensorMac;
 
-    /** Corresponds with MeasurementType.id */
     private int sensorType;
 
     public SensorNode() {

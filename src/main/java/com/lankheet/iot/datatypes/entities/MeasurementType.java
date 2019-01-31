@@ -45,7 +45,7 @@ public enum MeasurementType {
 	}
 	
 	public static MeasurementType getType(Integer type) {
-	    MeasurementType returnType = MeasurementType.TEMPERATURE;
+	    MeasurementType returnType = null;
 	    for (MeasurementType measType: MeasurementType.values()) {
 	        if (type == measType.getId()) {
 	            returnType = measType;
