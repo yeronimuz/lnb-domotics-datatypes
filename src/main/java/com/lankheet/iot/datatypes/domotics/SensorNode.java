@@ -20,8 +20,8 @@ public class SensorNode {
     /**
      * Constructor.
      * 
-     * @param id The sensor id
-     * @param type The type of sensor (SensorType)
+     * @param sensorMac The sensor id
+     * @param sensorType The type of sensor (SensorType)
      */
     public SensorNode(String sensorMac, int sensorType) {
         this.sensorMac = sensorMac;
@@ -83,8 +83,6 @@ public class SensorNode {
                 return false;
         } else if (!sensorMac.equals(other.sensorMac))
             return false;
-        if (sensorType != other.sensorType)
-            return false;
-        return true;
+        return sensorType == other.sensorType;
     }
 }
