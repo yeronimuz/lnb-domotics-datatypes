@@ -27,24 +27,29 @@ publishing{
    }
 }
 
+test{
+   ignoreFailures = !project.hasProperty('release')
+   // Workaround voor als Intellij je testen niet kan vinden wanneer je Gradle als executer gebruikt.
+   useJUnitPlatform()
+}
+
 ext{
-   junitVersion = '4.+'
-   jmockitVersion = '1.35'
    jacksonVersion = '2.8.1'
    hibernateVersion = '5.2.10.Final'
 }
 
 dependencies{
-   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
+   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.4'
 
-   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.3'
-   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.3'
-   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
-   implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.3'
-   implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.8.Final'
+   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.14.0'
+   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.14.0'
+   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.0'
+   implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.0'
+   implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.0.0'
 
-   testImplementation group: 'org.apache.derby', name: 'derby', version: '10.14.1.0'
-   testImplementation group: 'org.jmockit', name: 'jmockit', version: '1.41'
-   testImplementation group: 'junit', name: 'junit', version: junitVersion
+   testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.7.2'
+   testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.11.2'
+   testImplementation group: 'org.mockito', name: 'mockito-inline', version: '3.11.2'
+   testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.7.1'
    testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
 }

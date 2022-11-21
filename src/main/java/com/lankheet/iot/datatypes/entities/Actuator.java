@@ -1,10 +1,11 @@
 package com.lankheet.iot.datatypes.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 /**
  * Entity that is able to control peripherals at a Location.<BR>
@@ -17,7 +18,7 @@ public class Actuator {
    private int id;
 
     @ManyToOne
-    private Location location;
+    private Site site;
     
     // TODO: Accompanied sensor (0 or more)
     // TODO: Status
@@ -47,7 +48,7 @@ public class Actuator {
      * Get the location.
      * @return location
      */
-    public Location getLocation() {
-        return location;
+    public Site getLocation() {
+        return site;
     }
 }

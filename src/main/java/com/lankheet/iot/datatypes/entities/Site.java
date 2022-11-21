@@ -1,18 +1,20 @@
 package com.lankheet.iot.datatypes.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 /**
  * A location represents a domotics site.
  */
-@Entity(name = "locations")
-public class Location {
+@Entity(name = "sites")
+public class Site
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -20,7 +22,7 @@ public class Location {
     /** User defined free text */
     String locationText;
 
-    /** All users that have access to a location's data */
+    /** All users that have access to a location's data, at least one needs to have admin rights */
     @ManyToMany
     List<DomoticsUser> users;
 
@@ -32,7 +34,7 @@ public class Location {
     @OneToMany
     List<Actuator> actuators;
     
-    public Location() {
+    public Site() {
         // required for JPA
     }
     
@@ -41,7 +43,7 @@ public class Location {
      * 
      * @param locationText Free text for the location.
      */
-    public Location(String locationText) {
+    public Site(String locationText) {
         this.locationText = locationText;
     }
 

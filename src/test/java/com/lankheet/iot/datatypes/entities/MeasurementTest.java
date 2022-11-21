@@ -1,4 +1,4 @@
-package com.lankheet.iot.datatypes;
+package com.lankheet.iot.datatypes.entities;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -6,10 +6,11 @@ import static org.junit.Assert.assertThat;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,17 +18,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.lankheet.iot.datatypes.entities.Measurement;
-import com.lankheet.iot.datatypes.entities.MeasurementType;
-import com.lankheet.iot.datatypes.entities.Sensor;
-import com.lankheet.iot.datatypes.entities.SensorType;
 
 public class MeasurementTest {
-    private static final Logger LOG = LoggerFactory.getLogger(MeasurementTest.class);
-    private EntityManagerFactory entityManagerFactory;
+    private static final Logger               LOG = LoggerFactory.getLogger(MeasurementTest.class);
+    private              EntityManagerFactory entityManagerFactory;
 
-    private EntityManager entityManager;
-    private static final String PERSISTENCE_UNIT = "measurements-pu";
+    private              EntityManager entityManager;
+    private static final String        PERSISTENCE_UNIT = "measurements-pu";
     
     @Before
     public void testSetup() {

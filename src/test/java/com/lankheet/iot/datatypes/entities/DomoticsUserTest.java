@@ -1,17 +1,20 @@
 package com.lankheet.iot.datatypes.entities;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test for {@link DomoticsUser}.
@@ -21,8 +24,8 @@ public class DomoticsUserTest {
 
     private EntityManagerFactory entityManagerFactory;
 
-    private EntityManager entityManager;
-    private static final String PERSISTENCE_UNIT = "measurements-pu";
+    private              EntityManager entityManager;
+    private static final String        PERSISTENCE_UNIT = "measurements-pu";
     
     @Before
     public void testSetup() {
@@ -31,16 +34,15 @@ public class DomoticsUserTest {
     }
     
     @Test
-    public void test() {
-        List<Location> locations = new ArrayList<Location>() {{
-            add(new Location("main home"));
+    public void test(@Mock Site site) {
+        List<Site> sites = new ArrayList<Site>() {{
+            add(new Site("main home"));
         }};
-        DomoticsUser domoticsUser = new DomoticsUser("user1", "password1");
-        domoticsUser.setLocations(locations);
-        locations.get(0).setUserList(Arrays.asList(domoticsUser));
+        DomoticsUser domoticsUser = new DomoticsUser("user1", "password1", site);
+        sites.get(0).setUserList(Arrays.asList(domoticsUser));
         
         entityManager.getTransaction().begin();
-        entityManager.persist(locations.get(0));
+        entityManager.persist(sites.get(0));
         entityManager.persist(domoticsUser);
         entityManager.getTransaction().commit();
 

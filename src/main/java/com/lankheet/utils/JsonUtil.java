@@ -16,11 +16,11 @@ public class JsonUtil {
     private static final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule())
             .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    public static final String toJson(Object o) {
+    public static String toJson(Object o) {
         try {
             return mapper.writeValueAsString(o);
         } catch (JsonProcessingException e) {
-            logger.error("Json Processing was wrong: " + e, logger);
+            logger.error("Json Processing was wrong: {}", e.getMessage());
         }
 
         return null;

@@ -1,11 +1,11 @@
 package com.lankheet.iot.datatypes.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 /**
  * A sensor is the origin of a measurement.<BR>
@@ -29,7 +29,7 @@ public class Sensor {
     private String description;
 
     @ManyToOne
-    private Location location;
+    private Site site;
 
     /** Default constructor required for JPA */
     public Sensor() {}
@@ -90,17 +90,17 @@ public class Sensor {
      * 
      * @return location
      */
-    public Location getLocation() {
-        return location;
+    public Site getLocation() {
+        return site;
     }
 
     /**
      * Set location.
      * 
-     * @param location The location of this sensor
+     * @param site The location of this sensor
      */
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(Site site) {
+        this.site = site;
     }
 
     /**
@@ -125,6 +125,6 @@ public class Sensor {
     @Override
     public String toString() {
         return "Sensor [id=" + id + ", sensorType=" + sensorType + ", macAddress=" + macAddress + ", name=" + name
-                + ", description=" + description + ", location=" + location + "]";
+                + ", description=" + description + ", location=" + site + "]";
     }
 }

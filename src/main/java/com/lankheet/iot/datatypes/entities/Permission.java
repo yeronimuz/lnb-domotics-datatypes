@@ -1,17 +1,17 @@
 package com.lankheet.iot.datatypes.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 /**
  * User role; what may a user do.<BR>
  * A user may have more roles. Each role can be configured for CRUD and control actions.
  */
-@Entity(name = "roles")
-public class DomoticsRole {
+@Entity(name = "permissions")
+public class Permission
+{
     /** Permission to read location data */
     public static final int ROLE_PERMISSION_READ_FLAG = 0x1;
 
@@ -44,7 +44,7 @@ public class DomoticsRole {
     /** A user may or may not read */
     private int permissionFlags;
 
-    public DomoticsRole() {
+    public Permission() {
         // For JPA
     }
 
@@ -53,7 +53,7 @@ public class DomoticsRole {
      * 
      * @param name The name of the role
      */
-    public DomoticsRole(String name) {
+    public Permission(String name) {
         super();
         this.name = name;
     }

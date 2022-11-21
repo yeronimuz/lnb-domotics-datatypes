@@ -1,14 +1,15 @@
 package com.lankheet.iot.datatypes.conversion;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 import com.lankheet.iot.datatypes.entities.SensorType;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 /**
  * Converter for storing SensorType enum as integer in the database and vice versa.
  */
 @Converter(autoApply = true)
-public class SensorTypeConverter implements AttributeConverter<SensorType, Integer> {
+public class SensorTypeConverter implements AttributeConverter<SensorType, Integer>
+{
 
     @Override
     public Integer convertToDatabaseColumn(SensorType type) {
