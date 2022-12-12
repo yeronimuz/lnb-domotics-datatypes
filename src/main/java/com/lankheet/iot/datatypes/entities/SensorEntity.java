@@ -13,7 +13,8 @@ import jakarta.persistence.ManyToOne;
  * A measurement of different types can come from one sensor.
  */
 @Entity(name = "sensors")
-public class Sensor {
+public class SensorEntity
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,20 +30,19 @@ public class Sensor {
     private String description;
 
     @ManyToOne
-    private Site site;
+    private SiteEntity siteEntity;
 
     /** Default constructor required for JPA */
-    public Sensor() {}
+    public SensorEntity() {}
 
     /**
      * Constructor.
      * 
-     * @param id The sensor id
      * @param sensorType The type of sensor (SensorType)
      * @param name The name of this sensor
      * @param description A description (brand, model)
      */
-    public Sensor(SensorType sensorType, String macAddress, String name, String description) {
+    public SensorEntity(SensorType sensorType, String macAddress, String name, String description) {
         this.sensorType = sensorType;
         this.macAddress = macAddress;
         this.name = name;
@@ -90,17 +90,17 @@ public class Sensor {
      * 
      * @return location
      */
-    public Site getLocation() {
-        return site;
+    public SiteEntity getLocation() {
+        return siteEntity;
     }
 
     /**
      * Set location.
      * 
-     * @param site The location of this sensor
+     * @param siteEntity The location of this sensor
      */
-    public void setLocation(Site site) {
-        this.site = site;
+    public void setLocation(SiteEntity siteEntity) {
+        this.siteEntity = siteEntity;
     }
 
     /**
@@ -125,6 +125,6 @@ public class Sensor {
     @Override
     public String toString() {
         return "Sensor [id=" + id + ", sensorType=" + sensorType + ", macAddress=" + macAddress + ", name=" + name
-                + ", description=" + description + ", location=" + site + "]";
+                + ", description=" + description + ", location=" + siteEntity + "]";
     }
 }

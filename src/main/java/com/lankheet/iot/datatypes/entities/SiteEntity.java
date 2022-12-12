@@ -13,38 +13,38 @@ import java.util.List;
  * A location represents a domotics site.
  */
 @Entity(name = "sites")
-public class Site
+public class SiteEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     /** User defined free text */
-    String locationText;
+    String siteDescription;
 
     /** All users that have access to a location's data, at least one needs to have admin rights */
     @ManyToMany
-    List<DomoticsUser> users;
+    List<DomoticsUserEntity> users;
 
     /** All sensors in this location */
     @OneToMany
-    List<Sensor> sensors;
+    List<SensorEntity> sensorEntities;
 
     /** All actuators in this location */
     @OneToMany
-    List<Actuator> actuators;
+    List<ActuatorEntity> actuatorEntities;
     
-    public Site() {
+    public SiteEntity() {
         // required for JPA
     }
     
     /**
      * Constructor.
      * 
-     * @param locationText Free text for the location.
+     * @param siteDescription Free text for the location.
      */
-    public Site(String locationText) {
-        this.locationText = locationText;
+    public SiteEntity(String siteDescription) {
+        this.siteDescription = siteDescription;
     }
 
 
@@ -60,23 +60,23 @@ public class Site
      * Get locationText.
      * @return the locationText
      */
-    public String getLocationText() {
-        return locationText;
+    public String getSiteDescription() {
+        return siteDescription;
     }
 
     /**
      * Set locationText.
-     * @param locationText the locationText to set
+     * @param siteDescription the locationText to set
      */
-    public void setLocationText(String locationText) {
-        this.locationText = locationText;
+    public void setSiteDescription(String siteDescription) {
+        this.siteDescription = siteDescription;
     }
 
     /**
      * Get userList.
      * @return the userList
      */
-    public List<DomoticsUser> getUserList() {
+    public List<DomoticsUserEntity> getUserList() {
         return users;
     }
 
@@ -84,7 +84,7 @@ public class Site
      * Set userList.
      * @param userList the userList to set
      */
-    public void setUserList(List<DomoticsUser> userList) {
+    public void setUserList(List<DomoticsUserEntity> userList) {
         this.users = userList;
     }
 
@@ -92,31 +92,31 @@ public class Site
      * Get sensorList.
      * @return the sensorList
      */
-    public List<Sensor> getSensorList() {
-        return sensors;
+    public List<SensorEntity> getSensorList() {
+        return sensorEntities;
     }
 
     /**
      * Set sensorList.
-     * @param sensorList the sensorList to set
+     * @param sensorEntityList the sensorList to set
      */
-    public void setSensorList(List<Sensor> sensorList) {
-        this.sensors = sensorList;
+    public void setSensorList(List<SensorEntity> sensorEntityList) {
+        this.sensorEntities = sensorEntityList;
     }
 
     /**
      * Get actuatorList.
      * @return the actuatorList
      */
-    public List<Actuator> getActuatorList() {
-        return actuators;
+    public List<ActuatorEntity> getActuatorList() {
+        return actuatorEntities;
     }
 
     /**
      * Set actuatorList.
-     * @param actuatorList the actuatorList to set
+     * @param actuatorEntityList the actuatorList to set
      */
-    public void setActuatorList(List<Actuator> actuatorList) {
-        this.actuators = actuatorList;
+    public void setActuatorList(List<ActuatorEntity> actuatorEntityList) {
+        this.actuatorEntities = actuatorEntityList;
     }
 }

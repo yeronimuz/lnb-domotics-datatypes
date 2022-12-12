@@ -19,8 +19,9 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-public class MeasurementTest {
-    private static final Logger               LOG = LoggerFactory.getLogger(MeasurementTest.class);
+public class MeasurementEntityTest
+{
+    private static final Logger               LOG = LoggerFactory.getLogger(MeasurementEntityTest.class);
     private              EntityManagerFactory entityManagerFactory;
 
     private              EntityManager entityManager;
@@ -35,22 +36,22 @@ public class MeasurementTest {
     @Test
     public void testMeasurementWithSensor() throws JsonParseException, JsonMappingException, IOException {
         Date now = new Date();
-        Sensor sensor = new Sensor(SensorType.POWER_METER, "01:02:03:04", "mainPowerSensor", "meterkast");
-        Measurement meas = new Measurement(sensor, now, MeasurementType.CONSUMED_GAS, 2.0);
+        SensorEntity sensorEntity = new SensorEntity(SensorType.POWER_METER, "01:02:03:04", "mainPowerSensor", "meterkast");
+        MeasurementEntity meas = new MeasurementEntity(sensorEntity, now, MeasurementType.CONSUMED_GAS, 2.0);
 
         entityManager.getTransaction().begin();
-        entityManager.persist(sensor);
+        entityManager.persist(sensorEntity);
         entityManager.persist(meas);
         entityManager.getTransaction().commit();
 
-        TypedQuery<Measurement> query = entityManager.createQuery("SELECT m FROM measurements m", Measurement.class);
-        List<Measurement> measurements = query.getResultList();
+        TypedQuery<MeasurementEntity> query = entityManager.createQuery("SELECT m FROM measurements m", MeasurementEntity.class);
+        List<MeasurementEntity> measurements = query.getResultList();
         
         assertThat(measurements.size(), is(1));
         assertThat(measurements.get(0).getMeasurementType(), is(MeasurementType.CONSUMED_GAS));
-        Sensor sensorDb = measurements.get(0).getSensor();
-        assertThat(sensorDb, is(notNullValue()));
-        assertThat(sensorDb.getMacAddress(), is("01:02:03:04"));
+        SensorEntity sensorEntityDb = measurements.get(0).getSensor();
+        assertThat(sensorEntityDb, is(notNullValue()));
+        assertThat(sensorEntityDb.getMacAddress(), is("01:02:03:04"));
     }
     
     @After

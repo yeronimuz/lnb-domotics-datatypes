@@ -12,19 +12,20 @@ import jakarta.persistence.ManyToOne;
  * Actuator is always regarded separately from a Sensor, even when combined in one case.
  */
 @Entity(name = "actuators")
-public class Actuator {
+public class ActuatorEntity
+{
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
 
     @ManyToOne
-    private Site site;
+    private SiteEntity siteEntity;
     
     // TODO: Accompanied sensor (0 or more)
     // TODO: Status
     // TODO: params, values
     
-    public Actuator() {
+    public ActuatorEntity() {
         // TODO Auto-generated constructor stub
     }
     
@@ -48,7 +49,7 @@ public class Actuator {
      * Get the location.
      * @return location
      */
-    public Site getLocation() {
-        return site;
+    public SiteEntity getLocation() {
+        return siteEntity;
     }
 }

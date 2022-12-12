@@ -6,13 +6,13 @@
 
 	<persistence-unit name="measurements-pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>com.lankheet.iot.datatypes.entities.Site</class>
-        <class>com.lankheet.iot.datatypes.entities.DomoticsUser</class>
+		<class>com.lankheet.iot.datatypes.entities.SiteEntity</class>
+        <class>com.lankheet.iot.datatypes.entities.DomoticsUserEntity</class>
         <class>com.lankheet.iot.datatypes.entities.Permission</class>
-        <class>com.lankheet.iot.datatypes.entities.Sensor</class>
+        <class>com.lankheet.iot.datatypes.entities.SensorEntity</class>
         <class>com.lankheet.iot.datatypes.entities.SensorType</class>
-        <class>com.lankheet.iot.datatypes.entities.Actuator</class>
-        <class>com.lankheet.iot.datatypes.entities.Measurement</class>
+        <class>com.lankheet.iot.datatypes.entities.ActuatorEntity</class>
+        <class>com.lankheet.iot.datatypes.entities.MeasurementEntity</class>
         <class>com.lankheet.iot.datatypes.entities.MeasurementType</class>
 		<properties>
 			<!-- Configuring JDBC properties -->

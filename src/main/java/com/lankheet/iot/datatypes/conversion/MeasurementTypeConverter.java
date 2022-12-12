@@ -11,13 +11,16 @@ import jakarta.persistence.Converter;
 public class MeasurementTypeConverter implements AttributeConverter<MeasurementType, Integer>
 {
 
-    @Override
-    public Integer convertToDatabaseColumn(MeasurementType type) {
-        return type.getId();
-    }
+   @Override
+   public Integer convertToDatabaseColumn(MeasurementType type)
+   {
+      return type.getId();
+   }
 
-    @Override
-    public MeasurementType convertToEntityAttribute(Integer type) {
-        return MeasurementType.getType(type);
-    }
+
+   @Override
+   public MeasurementType convertToEntityAttribute(Integer type)
+   {
+      return MeasurementType.getType(type);
+   }
 }
