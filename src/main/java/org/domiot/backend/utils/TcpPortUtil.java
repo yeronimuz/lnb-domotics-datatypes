@@ -1,4 +1,4 @@
-package com.lankheet.utils;
+package org.domiot.backend.utils;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;

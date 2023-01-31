@@ -1,4 +1,4 @@
-package com.lankheet.iot.datatypes.domotics;
+package org.domiot.backend.iot.datatypes.domotics;
 
 import java.util.Date;
 

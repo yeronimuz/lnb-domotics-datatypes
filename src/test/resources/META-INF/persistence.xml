@@ -6,14 +6,14 @@
 
 	<persistence-unit name="measurements-pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>com.lankheet.iot.datatypes.entities.SiteEntity</class>
-        <class>com.lankheet.iot.datatypes.entities.DomoticsUserEntity</class>
-        <class>com.lankheet.iot.datatypes.entities.Permission</class>
-        <class>com.lankheet.iot.datatypes.entities.SensorEntity</class>
-        <class>com.lankheet.iot.datatypes.entities.SensorType</class>
-        <class>com.lankheet.iot.datatypes.entities.ActuatorEntity</class>
-        <class>com.lankheet.iot.datatypes.entities.MeasurementEntity</class>
-        <class>com.lankheet.iot.datatypes.entities.MeasurementType</class>
+		<class>org.domiot.backend.entities.SiteEntity</class>
+        <class>org.domiot.backend.entities.DomoticsUserEntity</class>
+        <class>org.domiot.backend.entities.Permission</class>
+        <class>org.domiot.backend.entities.SensorEntity</class>
+        <class>org.domiot.backend.entities.SensorType</class>
+        <class>org.domiot.backend.entities.ActuatorEntity</class>
+        <class>org.domiot.backend.entities.MeasurementEntity</class>
+        <class>org.domiot.backend.entities.MeasurementType</class>
 		<properties>
 			<!-- Configuring JDBC properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />

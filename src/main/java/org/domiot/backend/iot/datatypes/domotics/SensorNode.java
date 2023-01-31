@@ -1,4 +1,4 @@
-package com.lankheet.iot.datatypes.domotics;
+package org.domiot.backend.iot.datatypes.domotics;
 
 /**
  * A sensor node is the origin of a measurement in the Domotics domain.<BR>
