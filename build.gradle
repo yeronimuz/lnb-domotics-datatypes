@@ -7,8 +7,6 @@ apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.6.0-SNAPSHOT'
-
 task sourceJar(type: Jar){
    classifier 'sources'
    from sourceSets.main.allJava
@@ -17,8 +15,8 @@ task sourceJar(type: Jar){
 publishing{
    publications{
       maven(MavenPublication){
-         groupId 'com.lankheet.iot'
-         artifactId 'datatypes'
+         groupId 'com.lankheet.domiot'
+         artifactId 'domiot-datatypes'
          version project.version
 
          from components.java
@@ -48,12 +46,18 @@ dependencies{
    compileOnly group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '10.0.0'
 
    testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.9.0'
-   testImplementation group: 'org.hibernate', name: 'hibernate-core', version: '6.1.6.Final'
    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.0'
    testImplementation group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '10.0.0'
    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.11.2'
    testImplementation group: 'org.mockito', name: 'mockito-inline', version: '3.11.2'
    // derby 10.14.2.0 is highest working version for unit tests (10.15.2.0 fails unit tests)
+   testImplementation 'jakarta.platform:jakarta.jakartaee-web-api:9.1.0'
+   testImplementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.22'
+   testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.9.0'
+   // Highest Derby version with EmbeddedDriver
    testImplementation group: 'org.apache.derby', name: 'derby', version: '10.14.2.0'
+   testImplementation 'org.hibernate:hibernate-core:6.1.7.Final'
+   testImplementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.10.Final'
+
    testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
 }

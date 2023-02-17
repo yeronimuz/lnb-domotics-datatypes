@@ -1,10 +1,11 @@
-package org.domiot.backend.iot.datatypes.domotics;
+package org.domiot.domotics.datatypes;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * A sensor's measured value. It is the object that will be serialized and sent to the backend via
- * an MQTT broker and will be converted to a Measurement in the backend.
+ * an MQTT broker and will be handled by the backend.
  *
  */
 public class SensorValue {
@@ -110,6 +111,24 @@ public class SensorValue {
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SensorValue that = (SensorValue) o;
+        return measurementType == that.measurementType && Double.compare(that.value, value) == 0 && sensorNode.equals(
+            that.sensorNode) && timeStamp.equals(that.timeStamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sensorNode, timeStamp, measurementType, value);
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
@@ -117,42 +136,5 @@ public class SensorValue {
     public String toString() {
         return "SensorValue [sensorNode=" + sensorNode + ", timeStamp=" + timeStamp + ", measurementType="
                 + measurementType + ", value=" + value + "]";
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + measurementType;
-        result = prime * result + ((sensorNode == null) ? 0 : sensorNode.hashCode());
-        long temp;
-        temp = Double.doubleToLongBits(value);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        boolean returnValue = true;
-        SensorValue other = (SensorValue) obj;
-        if (!equalsInType(obj) || (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value)) )
-            returnValue =  false;
-        return returnValue;
-    }
-    
-    public boolean equalsInType(Object obj) {
-        boolean returnValue = false;
-        SensorValue other = (SensorValue) obj;
-        if ((this == obj) || (getClass() == obj.getClass()) && (this.measurementType == other.measurementType)){
-            returnValue =  true;
-        } 
-        returnValue &= (other.sensorNode != null) && sensorNode.equals(other.sensorNode);
-        return returnValue;
     }
 }

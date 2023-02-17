@@ -1,4 +1,4 @@
-package org.domiot.backend.utils;
+package org.domiot.utils;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
