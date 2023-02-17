@@ -29,12 +29,11 @@ public class DeviceEntity {
   @OneToOne
   private MqttConfigEntity mqttConfig;
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "deviceEntity")
-  private List<DomiotParameterEntity> parameters = null;
-
+  private List<DomiotParameterEntity> parameters;
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "deviceEntity")
-  private List<SensorEntity> sensors = null;
-  @OneToMany
-  private List<ActuatorEntity> actuators = null;
+  private List<SensorEntity> sensors;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "deviceEntity")
+  private List<ActuatorEntity> actuators;
 
   @ManyToOne
   private SiteEntity siteEntity;

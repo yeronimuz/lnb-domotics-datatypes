@@ -1,12 +1,11 @@
 package org.domiot.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import java.util.List;
 
 /**
  * User role; what may a user do.<BR> A user may have more roles. Each role can be configured for CRUD and control actions.
@@ -56,15 +55,13 @@ public class Permission {
   /**
    * Name of the role
    */
+  @Column(nullable = false, length = 45)
   private String name;
 
   /**
    * All user permissions OR-ed together
    */
   private int permissionFlags;
-
-  @ManyToMany(mappedBy = "permissions")
-  private List<UserEntity> userEntities;
 
   public Permission() {
     // For JPA
@@ -201,14 +198,6 @@ public class Permission {
   public void setControlPermission(boolean control) {
     this.permissionFlags = (control) ? (permissionFlags | ROLE_PERMISSION_CONTROL_FLAG)
         : (permissionFlags & ~ROLE_PERMISSION_CONTROL_FLAG);
-  }
-
-  public List<UserEntity> getUserEntities() {
-    return userEntities;
-  }
-
-  public void setUserEntities(List<UserEntity> userEntities) {
-    this.userEntities = userEntities;
   }
 
   /**

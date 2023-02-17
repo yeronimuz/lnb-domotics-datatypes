@@ -43,7 +43,7 @@ class UserEntityTest {
   @Test
   void test() {
     SiteEntity siteEntity = new SiteEntity("site description");
-    UserEntity userEntity = new UserEntity("user1", siteEntity);
+    UserEntity userEntity = new UserEntity("user1", "password", "user1@site1.org", siteEntity);
     siteEntity.setUserList(List.of(userEntity));
 
     entityManager.getTransaction().begin();

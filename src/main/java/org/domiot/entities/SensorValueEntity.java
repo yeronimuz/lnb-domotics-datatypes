@@ -19,9 +19,8 @@ import org.domiot.entities.conversion.MeasurementTypeConverter;
  * the database.
  */
 @Entity
-@Table(name = "sensorvalues")
+@Table(name = "sensorvalues", schema = "domiot")
 public class SensorValueEntity {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)

@@ -1,14 +1,14 @@
 package org.domiot.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.security.Principal;
 import java.util.List;
@@ -19,18 +19,33 @@ import java.util.List;
 @Entity
 @Table(name = "users", schema = "domiot")
 public class UserEntity implements Principal {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(nullable = false, unique = true, length = 45)
   private String userName;
+
+  @Column(name = "email", nullable = false, unique = true, length = 45)
+  private String email;
+
+  @Column(nullable = false, length = 64)
+  private String password;
+
+  private String firstName;
+
+  private String lastName;
 
   @ManyToOne
   private SiteEntity siteEntity;
 
   @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      schema = "domiot",
+      name = "users_permissions"
+  )
   private List<Permission> permissions;
-
 
   public UserEntity() {
     // For JPA
@@ -42,11 +57,12 @@ public class UserEntity implements Principal {
    *
    * @param userName user name
    */
-  public UserEntity(String userName, SiteEntity siteEntity) {
+  public UserEntity(String userName, String password, String email, SiteEntity siteEntity) {
     this.userName = userName;
     this.siteEntity = siteEntity;
+    this.password = password;
+    this.email = email;
   }
-
 
   /**
    * Get id.
@@ -57,7 +73,6 @@ public class UserEntity implements Principal {
     return this.id;
   }
 
-
   /**
    * Get userName.
    *
@@ -66,7 +81,6 @@ public class UserEntity implements Principal {
   public String getUserName() {
     return userName;
   }
-
 
   /**
    * Set userName.
@@ -77,27 +91,6 @@ public class UserEntity implements Principal {
     this.userName = userName;
   }
 
-
-  /**
-   * Get siteId.
-   *
-   * @return the location
-   */
-  public SiteEntity getSiteId() {
-    return siteEntity;
-  }
-
-
-  /**
-   * Set siteId.
-   *
-   * @param siteEntity the site to set
-   */
-  public void setSiteId(SiteEntity siteEntity) {
-    this.siteEntity = siteEntity;
-  }
-
-
   /**
    * Get permissions.
    *
@@ -107,9 +100,56 @@ public class UserEntity implements Principal {
     return this.permissions;
   }
 
-
   @Override
   public String getName() {
     return getUserName();
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public SiteEntity getSiteEntity() {
+    return siteEntity;
+  }
+
+  public void setSiteEntity(SiteEntity siteEntity) {
+    this.siteEntity = siteEntity;
+  }
+
+  public void setPermissions(List<Permission> permissions) {
+    this.permissions = permissions;
   }
 }
