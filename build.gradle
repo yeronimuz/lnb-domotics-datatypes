@@ -12,15 +12,16 @@ task sourceJar(type: Jar){
    from sourceSets.main.allJava
 }
 
+version findProperty('version')
+
 publishing{
    publications{
       maven(MavenPublication){
-         groupId 'com.lankheet.domiot'
-         artifactId 'domiot-datatypes'
-         version project.version
+         groupId findProperty('group')
+         artifactId findProperty('name')
+         version findProperty('version') + '-' + findProperty('classifier')
 
          from components.java
-         artifact tasks.sourceJar
       }
    }
 }

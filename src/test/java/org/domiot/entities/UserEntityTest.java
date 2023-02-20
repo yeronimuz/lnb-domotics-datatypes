@@ -48,7 +48,7 @@ class UserEntityTest {
 
     entityManager.getTransaction().begin();
     entityManager.persist(siteEntity);
-    entityManager.persist(userEntity);
+//    entityManager.persist(userEntity);
     entityManager.getTransaction().commit();
 
     TypedQuery<UserEntity> query = entityManager.createQuery("SELECT u FROM UserEntity u", UserEntity.class);
