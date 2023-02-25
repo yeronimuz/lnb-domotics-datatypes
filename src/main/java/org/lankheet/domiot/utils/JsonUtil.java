@@ -1,10 +1,10 @@
-package org.domiot.utils;
+package org.lankheet.domiot.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
-import org.domiot.domotics.datatypes.SensorValue;
+import org.lankheet.domiot.domotics.datatypes.SensorValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

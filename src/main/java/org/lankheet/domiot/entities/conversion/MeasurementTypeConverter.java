@@ -1,8 +1,8 @@
-package org.domiot.entities.conversion;
+package org.lankheet.domiot.entities.conversion;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import org.domiot.entities.MeasurementType;
+import org.lankheet.domiot.entities.MeasurementType;
 
 /**
  * Converter for storing MeasurementType enum as integer in the database and vice versa.

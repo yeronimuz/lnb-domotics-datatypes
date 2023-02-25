@@ -1,4 +1,4 @@
-package org.domiot.entities;
+package org.lankheet.domiot.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

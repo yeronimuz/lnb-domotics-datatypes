@@ -1,4 +1,4 @@
-package org.domiot.entities;
+package org.lankheet.domiot.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

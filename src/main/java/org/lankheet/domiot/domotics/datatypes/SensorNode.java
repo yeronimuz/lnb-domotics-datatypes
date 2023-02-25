@@ -1,4 +1,4 @@
-package org.domiot.domotics.datatypes;
+package org.lankheet.domiot.domotics.datatypes;
 
 /**
  * A SensorNode is the origin of a measurement in the Domiotics domain.<BR>

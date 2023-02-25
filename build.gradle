@@ -19,7 +19,7 @@ publishing{
       maven(MavenPublication){
          groupId findProperty('group')
          artifactId findProperty('name')
-         version findProperty('version') + '-' + findProperty('classifier')
+         version findProperty('version')
 
          from components.java
       }

@@ -1,4 +1,4 @@
-package org.domiot.entities;
+package org.lankheet.domiot.entities;
 
 import java.util.stream.Stream;
 

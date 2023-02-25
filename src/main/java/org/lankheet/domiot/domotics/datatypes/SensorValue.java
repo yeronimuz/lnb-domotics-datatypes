@@ -1,4 +1,4 @@
-package org.domiot.domotics.datatypes;
+package org.lankheet.domiot.domotics.datatypes;
 
 import java.util.Date;
 import java.util.Objects;

@@ -4,20 +4,20 @@
   version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
   <persistence-unit name="domiot">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>org.domiot.entities.MeasurementType</class>
-    <class>org.domiot.entities.SensorEntity</class>
-    <class>org.domiot.entities.SensorType</class>
-    <class>org.domiot.entities.SensorValueEntity</class>
-    <class>org.domiot.entities.UserEntity</class>
-    <class>org.domiot.entities.SiteEntity</class>
-    <class>org.domiot.entities.DeviceEntity</class>
-    <class>org.domiot.entities.ActuatorEntity</class>
-    <class>org.domiot.entities.Permission</class>
-    <class>org.domiot.entities.MqttConfigEntity</class>
-    <class>org.domiot.entities.MqttTopicEntity</class>
-    <class>org.domiot.entities.MqttTopicEntity</class>
-    <class>org.domiot.entities.DomiotParameterEntity</class>
-    <class>org.domiot.entities.Permission</class>
+    <class>org.lankheet.domiot.entities.MeasurementType</class>
+    <class>org.lankheet.domiot.entities.SensorEntity</class>
+    <class>org.lankheet.domiot.entities.SensorType</class>
+    <class>org.lankheet.domiot.entities.SensorValueEntity</class>
+    <class>org.lankheet.domiot.entities.UserEntity</class>
+    <class>org.lankheet.domiot.entities.SiteEntity</class>
+    <class>org.lankheet.domiot.entities.DeviceEntity</class>
+    <class>org.lankheet.domiot.entities.ActuatorEntity</class>
+    <class>org.lankheet.domiot.entities.Permission</class>
+    <class>org.lankheet.domiot.entities.MqttConfigEntity</class>
+    <class>org.lankheet.domiot.entities.MqttTopicEntity</class>
+    <class>org.lankheet.domiot.entities.MqttTopicEntity</class>
+    <class>org.lankheet.domiot.entities.DomiotParameterEntity</class>
+    <class>org.lankheet.domiot.entities.Permission</class>
 
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
