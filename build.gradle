@@ -1,52 +1,64 @@
+repositories{
+   mavenLocal()
+   mavenCentral()
+}
+
 apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.5.1-SNAPSHOT'
-
-task sourceJar(type: Jar) {
-    classifier 'sources'
-    from sourceSets.main.allJava
+task sourceJar(type: Jar){
+   classifier 'sources'
+   from sourceSets.main.allJava
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'com.lankheet.iot'
-            artifactId 'datatypes'
-            version project.version
+version findProperty('version')
 
-            from components.java
-            artifact tasks.sourceJar
-        }
-    }
+publishing{
+   publications{
+      maven(MavenPublication){
+         groupId findProperty('group')
+         artifactId findProperty('name')
+         version findProperty('version')
+
+         from components.java
+      }
+   }
 }
 
-repositories {
-	mavenLocal()
-    mavenCentral()
+test{
+   ignoreFailures = !project.hasProperty('release')
+   // Workaround voor als Intellij je testen niet kan vinden wanneer je Gradle als executer gebruikt.
+   useJUnitPlatform()
 }
 
-ext {
-    junitVersion = '4.+'
-    jmockitVersion = '1.35'
-    jacksonVersion = '2.8.1'
-    hibernateVersion = '5.2.10.Final'
+ext{
+   jacksonVersion = '2.8.1'
+   hibernateVersion = '5.2.10.Final'
 }
 
-dependencies {
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-//    compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.21'
-    compile group: 'com.smoketurner', name: 'dropwizard-swagger', version: '1.3.8-1'
+dependencies{
+   implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.4'
 
-    compile group: 'com.fasterxml.jackson.core', name:'jackson-core', version: jacksonVersion
-    compile group: 'com.fasterxml.jackson.core', name:'jackson-annotations', version: jacksonVersion
-    compile group: 'com.fasterxml.jackson.core', name:'jackson-databind', version: jacksonVersion
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jacksonVersion
-    compile group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
+   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.14.0'
+   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.14.0'
+   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.0'
+   implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.0'
+   compileOnly group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '10.0.0'
 
-    testCompile group: 'org.apache.derby', name: 'derby', version: '10.14.1.0'
-    testCompile group: 'org.jmockit', name: 'jmockit', version: jmockitVersion
-    testCompile group: 'junit', name: 'junit', version: junitVersion
-    testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
+   testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.9.0'
+   testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.0'
+   testImplementation group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '10.0.0'
+   testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.11.2'
+   testImplementation group: 'org.mockito', name: 'mockito-inline', version: '3.11.2'
+   // derby 10.14.2.0 is highest working version for unit tests (10.15.2.0 fails unit tests)
+   testImplementation 'jakarta.platform:jakarta.jakartaee-web-api:9.1.0'
+   testImplementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.22'
+   testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.9.0'
+   // Highest Derby version with EmbeddedDriver
+   testImplementation group: 'org.apache.derby', name: 'derby', version: '10.14.2.0'
+   testImplementation 'org.hibernate:hibernate-core:6.1.7.Final'
+   testImplementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.10.Final'
+
+   testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
 }
