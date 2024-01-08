@@ -9,9 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "mqtt_config", schema = "domiot")
 public class MqttConfigEntity {
@@ -26,51 +33,4 @@ public class MqttConfigEntity {
   private String url;
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "mqttConfigEntity")
   private List<MqttTopicEntity> mqttTopicEntities = new java.util.ArrayList<>();
-
-  @OneToOne
-  private SiteEntity siteEntity;
-
-  public MqttConfigEntity() {
-    // For JPA
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public BigDecimal getClientId() {
-    return clientId;
-  }
-
-  public void setClientId(BigDecimal clientId) {
-    this.clientId = clientId;
-  }
-
-  public BigDecimal getUserId() {
-    return userId;
-  }
-
-  public void setUserId(BigDecimal userId) {
-    this.userId = userId;
-  }
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  public List<MqttTopicEntity> getTopicEntities() {
-    return mqttTopicEntities;
-  }
-
-  public void setMqttTopicEntities(List<MqttTopicEntity> mqttTopicEntities) {
-    this.mqttTopicEntities = mqttTopicEntities;
-  }
 }

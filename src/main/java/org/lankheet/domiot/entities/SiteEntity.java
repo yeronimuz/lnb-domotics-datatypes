@@ -10,12 +10,19 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.util.List;
 
 /**
  * A location represents a domotics site.
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "sites", schema = "domiot")
 public class SiteEntity {
@@ -54,64 +61,4 @@ public class SiteEntity {
   @OneToOne(mappedBy = "siteEntity")
   private MqttConfigEntity mqttConfigEntity;
 
-  public SiteEntity() {
-    // required for JPA
-  }
-
-  public SiteEntity(String description) {
-    this.description = description;
-  }
-
-
-  public long getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Date getDtCreated() {
-    return dtCreated;
-  }
-
-  public void setDtCreated(Date dtCreated) {
-    this.dtCreated = dtCreated;
-  }
-
-  public List<UserEntity> getUserList() {
-    return users;
-  }
-
-  public void setUserList(List<UserEntity> userList) {
-    this.users = userList;
-  }
-
-  public List<DeviceEntity> getDeviceEntities() {
-    return deviceEntities;
-  }
-
-  public void setDeviceEntities(List<DeviceEntity> deviceEntities) {
-    this.deviceEntities = deviceEntities;
-  }
-
-  public MqttConfigEntity getMqttConfigEntity() {
-    return mqttConfigEntity;
-  }
-
-  public void setMqttConfigEntity(MqttConfigEntity mqttConfigEntity) {
-    this.mqttConfigEntity = mqttConfigEntity;
-  }
 }

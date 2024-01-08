@@ -8,57 +8,34 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Data
 @Entity
 @Table(name = "domiot_parameters", schema = "domiot")
 public class DomiotParameterEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "device_id")
-  private DeviceEntity deviceEntity;
+    private String name;
 
-  @ManyToOne
-  @JoinColumn(name = "sensor_id")
-  private SensorEntity sensorEntity;
+    private String parameterType;
 
-  @ManyToOne
-  @JoinColumn(name = "actuator_id")
-  private ActuatorEntity actuatorEntity;
+    private Object value;
 
-  public Long getId() {
-    return id;
-  }
+    @ManyToOne
+    @JoinColumn(name = "device_id")
+    private DeviceEntity deviceEntity;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    @ManyToOne
+    @JoinColumn(name = "sensor_id")
+    private SensorEntity sensorEntity;
 
-  public DeviceEntity getDeviceEntity() {
-    return deviceEntity;
-  }
-
-  public void setDeviceEntity(DeviceEntity deviceEntity) {
-    this.deviceEntity = deviceEntity;
-  }
-
-  public SensorEntity getSensorEntity() {
-    return sensorEntity;
-  }
-
-  public void setSensorEntity(SensorEntity sensorEntity) {
-    this.sensorEntity = sensorEntity;
-  }
-
-  public ActuatorEntity getActuatorEntity() {
-    return actuatorEntity;
-  }
-
-  public void setActuatorEntity(ActuatorEntity actuatorEntity) {
-    this.actuatorEntity = actuatorEntity;
-  }
-
+    @ManyToOne
+    @JoinColumn(name = "actuator_id")
+    private ActuatorEntity actuatorEntity;
 }

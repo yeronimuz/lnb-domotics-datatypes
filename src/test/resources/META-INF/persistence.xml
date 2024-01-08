@@ -12,12 +12,12 @@
     <class>org.lankheet.domiot.entities.SiteEntity</class>
     <class>org.lankheet.domiot.entities.DeviceEntity</class>
     <class>org.lankheet.domiot.entities.ActuatorEntity</class>
-    <class>org.lankheet.domiot.entities.Permission</class>
+    <class>org.lankheet.domiot.entities.PermissionEntity</class>
     <class>org.lankheet.domiot.entities.MqttConfigEntity</class>
     <class>org.lankheet.domiot.entities.MqttTopicEntity</class>
     <class>org.lankheet.domiot.entities.MqttTopicEntity</class>
     <class>org.lankheet.domiot.entities.DomiotParameterEntity</class>
-    <class>org.lankheet.domiot.entities.Permission</class>
+    <class>org.lankheet.domiot.entities.PermissionEntity</class>
 
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
