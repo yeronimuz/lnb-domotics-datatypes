@@ -11,6 +11,7 @@ public interface SensorMapper {
     @Mapping(source = "type", target = "sensorType")
     @Mapping(source = "mqttTopic.path", target = "mqttPath")
     @Mapping(target="sensorTypeValue", ignore = true)
+    @Mapping(target="deviceEntity", ignore = true)
     SensorEntity map(Sensor sensorSource);
 
     @Mapping(target = "removeParametersItem", ignore = true)

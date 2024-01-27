@@ -33,4 +33,7 @@ public class MqttConfigEntity {
   private String url;
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "mqttConfigEntity")
   private List<MqttTopicEntity> mqttTopicEntities = new java.util.ArrayList<>();
+
+  @OneToOne
+  private SiteEntity siteEntity;
 }

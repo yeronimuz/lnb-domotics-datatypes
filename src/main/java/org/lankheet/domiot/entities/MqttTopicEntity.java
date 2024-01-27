@@ -25,4 +25,7 @@ public class MqttTopicEntity {
    * #siteId/floor/room/device/sensor|actutor/sensor|actuatorId
    */
   private String path;
+
+  @ManyToOne
+  private MqttConfigEntity mqttConfigEntity;
 }

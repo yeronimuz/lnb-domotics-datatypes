@@ -42,4 +42,7 @@ public class DeviceEntity {
   private List<SensorEntity> sensors;
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "deviceEntity")
   private List<ActuatorEntity> actuators;
+
+  @ManyToOne
+  private SiteEntity siteEntity;
 }

@@ -36,9 +36,9 @@ public class SensorEntity {
   @OneToMany(mappedBy = "sensorEntity")
   private List<DomiotParameterEntity> parameterEntities;
 
-//  @ManyToOne
-//  @JoinColumn(name = "device_id")
-//  private DeviceEntity deviceEntity;
+  @ManyToOne
+  @JoinColumn(name = "device_id")
+  private DeviceEntity deviceEntity;
 
   @Basic
   private int sensorTypeValue;

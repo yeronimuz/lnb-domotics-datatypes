@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {SensorMapper.class, ActuatorMapper.class, DomiotParameterMapper.class, MqttConfigMapper.class, SerialConfigMapper.class})
 public interface DeviceMapper {
+    @Mapping(target = "siteEntity", ignore = true)
     DeviceEntity map(Device device);
 
     @Mapping(target = "removeParametersItem", ignore = true)

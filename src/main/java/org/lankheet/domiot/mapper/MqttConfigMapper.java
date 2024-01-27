@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {MqttTopicMapper.class })
 public interface MqttConfigMapper {
     @Mapping(target = "mqttTopicEntities", source = "topics")
+    @Mapping(target = "siteEntity", ignore = true)
     MqttConfigEntity map(MqttConfig mqttConfig);
 
     @Mapping(target = "removeTopicsItem", ignore = true)
