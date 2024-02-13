@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.security.Principal;
 import java.util.List;
 
 /**
@@ -26,34 +25,31 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users", schema = "domiot")
-public class UserEntity /*implements Principal */{
+public class UserEntity /*implements Principal */ {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-  @Column(nullable = false, unique = true, length = 45)
-  private String userName;
+    @Column(nullable = false, unique = true, length = 45)
+    private String userName;
 
-  @Column(name = "email", nullable = false, unique = true, length = 45)
-  private String email;
+    @Column(name = "email", nullable = false, unique = true, length = 45)
+    private String email;
 
-  @Column(nullable = false, length = 64)
-  private String password;
+    private String firstName;
 
-  private String firstName;
+    private String lastName;
 
-  private String lastName;
+    @ManyToOne
+    @JoinColumn(name = "site_id")
+    private SiteEntity siteEntity;
 
-  @ManyToOne
-  @JoinColumn(name="site_id")
-  private SiteEntity siteEntity;
-
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(
-      schema = "domiot",
-      name = "users_permissions"
-  )
-  private List<PermissionEntity> permissionEntities;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            schema = "domiot",
+            name = "users_permissions"
+    )
+    private List<PermissionEntity> permissionEntities;
 
 }

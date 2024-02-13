@@ -28,47 +28,41 @@ import java.util.List;
 @Entity
 @Table(name = "sensors", schema = "domiot")
 public class SensorEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private int id;
 
-  @OneToMany(mappedBy = "sensorEntity")
-  private List<DomiotParameterEntity> parameterEntities;
+    @OneToMany(mappedBy = "sensorEntity")
+    private List<DomiotParameterEntity> parameterEntities;
 
-  @ManyToOne
-  @JoinColumn(name = "device_id")
-  private DeviceEntity deviceEntity;
+    @ManyToOne
+    @JoinColumn(name = "device_id")
+    private DeviceEntity deviceEntity;
 
-  @Basic
-  private int sensorTypeValue;
+    @Basic
+    private int sensorTypeValue;
 
-  @Transient
-  private SensorType sensorType;
+    @Transient
+    private SensorType sensorType;
 
-  /**
-   * The path that will be used to publish sensor values
-   */
-  private String mqttPath;
+    private String name;
 
-  @PostLoad
-  void fillTransient() {
-    if (sensorTypeValue > 0) {
-      this.sensorType = SensorType.getType(sensorTypeValue);
+    private String description;
+
+    private String mqttTopic;
+
+    @PostLoad
+    void fillTransient() {
+        if (sensorTypeValue > 0) {
+            this.sensorType = SensorType.getType(sensorTypeValue);
+        }
     }
-  }
 
-  @PrePersist
-  void fillPersistent() {
-    if (sensorType != null) {
-      this.sensorTypeValue = sensorType.getId();
+    @PrePersist
+    void fillPersistent() {
+        if (sensorType != null) {
+            this.sensorTypeValue = sensorType.getId();
+        }
     }
-  }
-
-  private String name;
-
-  private String description;
-
-  private String mqttTopic;
-
 }

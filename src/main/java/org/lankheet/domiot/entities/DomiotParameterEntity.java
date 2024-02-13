@@ -37,4 +37,6 @@ public class DomiotParameterEntity {
     @ManyToOne
     @JoinColumn(name = "actuator_id")
     private ActuatorEntity actuatorEntity;
+
+    private Boolean readonly;
 }

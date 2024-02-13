@@ -2,11 +2,11 @@ package org.lankheet.domiot.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,17 +23,21 @@ import java.util.List;
 @Table(name = "mqtt_config", schema = "domiot")
 public class MqttConfigEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private int id;
 
-  private BigDecimal clientId;
-  private BigDecimal userId;
-  private String url;
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "mqttConfigEntity")
-  private List<MqttTopicEntity> mqttTopicEntities = new java.util.ArrayList<>();
+    private BigDecimal clientId;
 
-  @OneToOne
-  private SiteEntity siteEntity;
+    @ManyToOne
+    private UserEntity userEntity;
+
+    private String url;
+
+    @ManyToMany
+    private List<MqttTopicEntity> mqttTopicEntities = new java.util.ArrayList<>();
+
+    @OneToOne
+    private SiteEntity siteEntity;
 }
