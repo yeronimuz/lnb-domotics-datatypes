@@ -29,7 +29,7 @@ public class UserEntity /*implements Principal */ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 45)
     private String userName;

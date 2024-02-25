@@ -22,7 +22,7 @@ public class PermissionEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   /**
    * Name of the role

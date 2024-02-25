@@ -9,8 +9,10 @@ import org.mapstruct.Mapping;
 public interface MqttConfigMapper {
     @Mapping(target = "mqttTopicEntities", source = "topics")
     @Mapping(target = "siteEntity", ignore = true)
+    @Mapping(target = "userEntity.id", source = "userId")
     MqttConfigEntity map(MqttConfig mqttConfig);
 
+    @Mapping(source = "userEntity.id", target = "userId")
     @Mapping(target = "removeTopicsItem", ignore = true)
     @Mapping(source = "mqttTopicEntities", target = "topics")
     MqttConfig map(MqttConfigEntity mqttConfigEntity);

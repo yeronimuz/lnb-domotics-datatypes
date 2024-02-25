@@ -19,7 +19,7 @@ public class MqttTopicEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   /**
    * #siteId/floor/room/device/sensor|actutor/sensor|actuatorId

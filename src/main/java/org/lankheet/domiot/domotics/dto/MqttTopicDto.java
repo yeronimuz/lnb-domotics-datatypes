@@ -1,15 +1,18 @@
 package org.lankheet.domiot.domotics.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
+/**
+ * Mqtt topic DTO for the MQTT domain
+ */
 @Data
-@Accessors(fluent = true, chain = true)
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@JsonTypeName("MqttTopic")
 public class MqttTopicDto {
     @JsonProperty("type")
     private String type;

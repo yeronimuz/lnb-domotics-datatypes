@@ -1,8 +1,10 @@
 package org.lankheet.domiot.entities;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * A sensor is the origin of a measurement
+ * A sensor is the origin of a sensorvalue
  */
 @Data
 @AllArgsConstructor
@@ -31,13 +33,13 @@ public class SensorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    private int id;
+    private Long id;
 
-    @OneToMany(mappedBy = "sensorEntity")
+    @OneToMany(mappedBy = "sensorEntity", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<DomiotParameterEntity> parameterEntities;
 
-    @ManyToOne
-    @JoinColumn(name = "device_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "device_id", nullable = false)
     private DeviceEntity deviceEntity;
 
     @Basic
@@ -46,6 +48,7 @@ public class SensorEntity {
     @Transient
     private SensorType sensorType;
 
+    @Column(unique = true)
     private String name;
 
     private String description;

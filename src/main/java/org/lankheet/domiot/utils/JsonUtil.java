@@ -14,6 +14,9 @@ public class JsonUtil {
     private static final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule())
             .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
+    private JsonUtil() {
+    }
+
     public static String toJson(Object o) {
         try {
             return mapper.writeValueAsString(o);

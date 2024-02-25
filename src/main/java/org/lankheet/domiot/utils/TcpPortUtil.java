@@ -7,6 +7,10 @@ import java.net.Socket;
  * Utility to test whether ports are open
  */
 public class TcpPortUtil {
+
+    private TcpPortUtil() {
+    }
+
     /**
      * Test the port availability on a host
      *

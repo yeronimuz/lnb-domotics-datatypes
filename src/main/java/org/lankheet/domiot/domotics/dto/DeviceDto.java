@@ -1,14 +1,19 @@
 package org.lankheet.domiot.domotics.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Device DTO for the MQTT domain
+ */
 @Data
-@Accessors(fluent = true, chain = true)
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class DeviceDto {
     private String manufacturerId;

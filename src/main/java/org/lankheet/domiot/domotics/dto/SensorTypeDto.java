@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.util.stream.Stream;
 
+/**
+ * Sensor type DTO for the MQTT domain. Don't change entries, just add
+ */
 @Getter
 public enum SensorTypeDto {
     NOT_USED(0, "NOT_USED"),
