@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SensorValueDto {
-    @JsonProperty("sensor")
-    private SensorDto sensor;
+    @JsonProperty("sensorId")
+    private long sensorId;
 
     @JsonProperty("timestamp")
     private LocalDateTime timeStamp;

@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 public interface ParameterTypeMapper {
     default ParameterTypeEnum map(String parameterType) {
         for (ParameterTypeEnum type : ParameterTypeEnum.values()) {
-            if (type.value().equals(parameterType)) {
+            if (type.getValue().equals(parameterType)) {
                 return type;
             }
         }
@@ -15,7 +15,7 @@ public interface ParameterTypeMapper {
     }
 
     default String map(ParameterTypeEnum parameterTypeEnum) {
-        return parameterTypeEnum.value();
+        return parameterTypeEnum.getValue();
     }
 
 }

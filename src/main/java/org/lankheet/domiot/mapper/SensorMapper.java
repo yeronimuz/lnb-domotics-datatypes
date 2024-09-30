@@ -8,13 +8,12 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {SensorTypeMapper.class, MqttTopicMapper.class, MqttTopicPathMapper.class, DomiotParameterMapper.class})
 public interface SensorMapper {
     @Mapping(source = "parameters", target = "parameterEntities")
-    @Mapping(source = "type", target = "sensorType")
+    @Mapping(source = "mqttTopic.path", target = "mqttTopic")
     @Mapping(target = "sensorTypeValue", ignore = true)
     @Mapping(target = "deviceEntity", ignore = true)
     SensorEntity map(Sensor sensorSource);
 
-    @Mapping(target = "removeParametersItem", ignore = true)
+    @Mapping(target = "mqttTopic.path", source = "mqttTopic")
     @Mapping(target = "parameters", source = "parameterEntities")
-    @Mapping(target = "type", source = "sensorType")
     Sensor map(SensorEntity sensorEntitySource);
 }

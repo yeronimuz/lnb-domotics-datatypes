@@ -17,12 +17,24 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SensorDto {
+    /**
+     * A sensor is identified by the device's MAC and the sensorType
+     */
     @JsonProperty("deviceMac")
     private String deviceMac;
+    /**
+     * Per sensor, the topic must be unique
+     */
     @JsonProperty("topic")
     private MqttTopicDto mqttTopic;
+    /**
+     * A sensor is identified by the device's MAC and the sensorType
+     */
     @JsonProperty("type")
     private SensorTypeDto sensorType;
+    /**
+     * The sensor is configured by setting parameters
+     */
     @JsonProperty("parameters")
     private List<DomiotParameterDto> parameters;
 

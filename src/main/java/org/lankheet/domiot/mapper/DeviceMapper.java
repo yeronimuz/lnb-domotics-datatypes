@@ -5,13 +5,16 @@ import org.lankheet.domiot.model.Device;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {SensorMapper.class, ActuatorMapper.class, DomiotParameterMapper.class, MqttConfigMapper.class, SerialConfigMapper.class})
+import java.util.List;
+
+@Mapper(componentModel = "spring", uses = {MqttTopicMapper.class, SensorMapper.class, ActuatorMapper.class, DomiotParameterMapper.class, MqttConfigMapper.class, SerialConfigMapper.class})
 public interface DeviceMapper {
     @Mapping(target = "siteEntity", ignore = true)
-    DeviceEntity map(Device device);
+    DeviceEntity map(Device deviceDto);
 
-    @Mapping(target = "removeParametersItem", ignore = true)
-    @Mapping(target = "removeSensorsItem", ignore = true)
-    @Mapping(target = "removeActuatorsItem", ignore = true)
     Device map(DeviceEntity deviceEntity);
+
+    List<Device> mapToDto(List<DeviceEntity> deviceEntities);
+
+    List<DeviceEntity> mapToEntities(List<Device> deviceEntities);
 }

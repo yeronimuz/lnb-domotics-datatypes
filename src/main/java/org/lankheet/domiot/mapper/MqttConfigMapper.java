@@ -5,7 +5,7 @@ import org.lankheet.domiot.model.MqttConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {MqttTopicMapper.class })
+@Mapper(componentModel = "spring", uses = {MqttTopicMapper.class})
 public interface MqttConfigMapper {
     @Mapping(target = "mqttTopicEntities", source = "topics")
     @Mapping(target = "siteEntity", ignore = true)
@@ -13,7 +13,6 @@ public interface MqttConfigMapper {
     MqttConfigEntity map(MqttConfig mqttConfig);
 
     @Mapping(source = "userEntity.id", target = "userId")
-    @Mapping(target = "removeTopicsItem", ignore = true)
     @Mapping(source = "mqttTopicEntities", target = "topics")
     MqttConfig map(MqttConfigEntity mqttConfigEntity);
 }

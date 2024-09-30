@@ -7,7 +7,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {MqttTopicMapper.class, MqttTopicPathMapper.class, DomiotParameterMapper.class})
 public interface ActuatorMapper {
-    @Mapping(target = "removeParametersItem", ignore = true)
     @Mapping(target = "parameters", source = "parameterEntities")
     Actuator map(ActuatorEntity actuatorEntity);
 
