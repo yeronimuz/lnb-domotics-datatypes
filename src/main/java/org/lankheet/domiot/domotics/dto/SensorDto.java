@@ -18,6 +18,11 @@ import java.util.List;
 @NoArgsConstructor
 public class SensorDto {
     /**
+     * The sensorId is determined by the backend after storing the sensor in the database
+     */
+    @JsonProperty
+    private long sensorId;
+    /**
      * A sensor is identified by the device's MAC and the sensorType
      */
     @JsonProperty("deviceMac")
