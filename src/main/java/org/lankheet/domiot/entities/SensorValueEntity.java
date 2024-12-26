@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "sensor_values", schema = "domiot", indexes = @Index(columnList = "sensorEntity, timeStamp"))
+@Table(name = "sensor_values", schema = "domiot", indexes = @Index(columnList = "sensorId, timeStamp"))
 public class SensorValueEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

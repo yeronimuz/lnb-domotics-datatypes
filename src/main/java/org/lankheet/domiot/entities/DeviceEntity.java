@@ -3,6 +3,7 @@ package org.lankheet.domiot.entities;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,11 +40,11 @@ public class DeviceEntity {
     private MqttConfigEntity mqttConfig;
     @OneToOne
     private SerialConfigEntity serialConfig;
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "deviceEntity")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "deviceEntity", fetch = FetchType.EAGER)
     private List<DomiotParameterEntity> parameters;
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "deviceEntity")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "deviceEntity", fetch = FetchType.EAGER)
     private List<SensorEntity> sensors;
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "deviceEntity")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "deviceEntity", fetch = FetchType.EAGER)
     private List<ActuatorEntity> actuators;
 
     @ManyToOne
