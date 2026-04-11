@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class DomiotParameterDto {
     private String name;
     private String parameterType;
-    private Object value;
+    private String value;
     private boolean readonly;
 }

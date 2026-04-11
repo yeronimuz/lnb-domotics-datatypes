@@ -1,6 +1,9 @@
 package org.lankheet.domiot.entities;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,29 +12,26 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
-/**
- * Test for {@link UserEntity}.
- */
 @DataJpaTest
 @ActiveProfiles("h2") // or "mariadb"
 @ContextConfiguration(classes = TestDataApplicationConfig.class)
-class UserEntityTest {
+class SensorSummaryEntityTest {
     @Autowired
     private TestEntityManager entityManager;
 
     @Test
     void testPersist() {
-        var user = new UserEntity();
-        user.setUserName("john");
-        user.setEmail("john.doe@gmail.com");
-        user.setFirstName("John");
-        user.setLastName("Doe");
-        user.setSiteEntity(null);
-        entityManager.persist(user);
+        var summary = new SensorSummaryEntity();
+        summary.setSensorId(1);
+        summary.setPeriodType(PeriodType.HOURLY);
+        LocalDateTime now = LocalDateTime.now();
+        summary.setPeriodStart(now);
+        SensorSummaryEntity persisted = entityManager.persist(summary);
         entityManager.flush();
 
-        UserEntity found = entityManager.find(UserEntity.class, user.getId());
+        SensorSummaryEntity found = entityManager.find(SensorSummaryEntity.class, persisted.getId());
         assertThat(found).isNotNull();
+        assertThat(found.getPeriodType()).isEqualTo(PeriodType.HOURLY);
+        assertThat(found.getPeriodStart()).isEqualTo(now);
     }
 }
-

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mqtt_topics", schema = "domiot")
+@Table(name = "mqtt_topics")
 public class MqttTopicEntity {
 
   @Id

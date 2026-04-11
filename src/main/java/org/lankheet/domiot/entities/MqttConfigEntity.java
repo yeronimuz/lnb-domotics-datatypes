@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mqtt_config", schema = "domiot")
+@Table(name = "mqtt_config")
 public class MqttConfigEntity {
 
     @Id

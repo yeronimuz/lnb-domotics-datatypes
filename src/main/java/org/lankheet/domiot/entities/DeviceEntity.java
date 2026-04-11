@@ -18,11 +18,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Entity class for device
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "devices", schema = "domiot")
+@Table(name = "devices")
 public class DeviceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

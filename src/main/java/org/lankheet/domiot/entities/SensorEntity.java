@@ -28,7 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "sensors", schema = "domiot")
+@Table(name = "sensors")
 public class SensorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

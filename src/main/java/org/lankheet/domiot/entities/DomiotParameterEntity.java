@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "domiot_parameters", schema = "domiot")
+@Table(name = "domiot_parameters")
 public class DomiotParameterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,8 @@ public class DomiotParameterEntity {
 
     private String parameterType;
 
-    @Column(name = "value", columnDefinition = "varchar(255)")
-    private Object value;
+    @Column(name = "`value`", columnDefinition = "varchar(255)")
+    private String value;
 
     @ManyToOne
     @JoinColumn(name = "device_id")

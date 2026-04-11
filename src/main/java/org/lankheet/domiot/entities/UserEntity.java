@@ -24,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users", schema = "domiot")
+@Table(name = "users")
 public class UserEntity /*implements Principal */ {
 
     @Id
@@ -47,7 +47,7 @@ public class UserEntity /*implements Principal */ {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            schema = "domiot",
+//            schema = "domiot",
             name = "users_permissions"
     )
     private List<PermissionEntity> permissionEntities;

@@ -25,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "actuators", schema = "domiot")
+@Table(name = "actuators")
 public class ActuatorEntity {
 
   @Id

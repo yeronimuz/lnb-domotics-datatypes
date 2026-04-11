@@ -1,5 +1,8 @@
 package org.lankheet.domiot.entities;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,14 +11,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * A location represents a domotics site.
@@ -24,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "sites", schema = "domiot")
+@Table(name = "sites")
 public class SiteEntity {
 
     @Id
@@ -40,8 +39,7 @@ public class SiteEntity {
      */
     private String description;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date dtCreated;
+    private LocalDateTime dtCreated;
 
     /**
      * All users that have access to a location's data, at least one needs to have admin rights

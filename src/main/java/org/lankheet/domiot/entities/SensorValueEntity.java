@@ -14,17 +14,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "sensor_values", schema = "domiot", indexes = @Index(columnList = "sensorId, timeStamp"))
+@Table(name = "sensor_values", indexes = @Index(columnList = "sensor_id, time_stamp"))
 public class SensorValueEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name = "sensor_id")
     private Long sensorId;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name = "time_stamp")
     private LocalDateTime timeStamp;
 
+    @Column(name = "`value`")
     private double value;
 }

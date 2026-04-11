@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "permissions", schema = "domiot")
+@Table(name = "permissions")
 public class PermissionEntity {
 
   @Id

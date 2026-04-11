@@ -1,30 +1,47 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'io.freefair.lombok' version '8.6'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-apply plugin: 'java-library'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
     withSourcesJar()
     withJavadocJar()
 }
 
-tasks.register('sourceJar', Jar) {
-    classifier 'sources'
-    from sourceSets.main.allJava
+tasks.withType(JavaCompile).configureEach {
+    options.release = 23
+}
+
+ext {
+    jacksonVersion = '3.1.1'
+    springVersion = '3.5.13'
+    hibernateVersion = '5.6.15.Final'
 }
 
 version findProperty('version')
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:$springVersion"
+    }
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId findProperty('group')
-            artifactId findProperty('name')
-            version findProperty('version')
+            groupId =  findProperty('group')
+            artifactId = findProperty('name')
+            version = findProperty('version')
 
             from components.java
         }
@@ -36,38 +53,38 @@ test {
     useJUnitPlatform()
 }
 
-ext {
-    jacksonVersion = '2.8.1'
-    hibernateVersion = '5.2.10.Final'
-}
 
 dependencies {
-    implementation group: 'org.lankheet.domiot', name: 'domiot-rest-api', version: '1.2.0'
+    implementation 'org.lankheet.domiot:domiot-rest-api:1.4.0-SNAPSHOT'
+    implementation 'org.msgpack:jackson-dataformat-msgpack:0.9.11'
+//    implementation 'ch.qos.logback:logback-classic:1.5.12'
+    implementation 'org.springframework.data:spring-data-jpa'
+//    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation 'tools.jackson.module:jackson-module-jakarta-xmlbind-annotations:3.1.1'
+    implementation "tools.jackson.core:jackson-databind:$jacksonVersion"
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2'
+    implementation 'org.mapstruct:mapstruct:1.6.3'
+    compileOnly 'org.projectlombok:lombok:1.18.44'
+    implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.5'
 
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.6'
-    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.4.0'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.14.0'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.15.1'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.1'
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.0'
-    compileOnly group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '10.0.0'
-    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
-    implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
-    implementation group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: '0.2.0'
+    compileOnly 'jakarta.platform:jakarta.jakartaee-api:11.0.0'
 
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
+    annotationProcessor 'org.projectlombok:lombok:1.18.44'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 
-    testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.9.0'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.0'
-    testImplementation group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '10.0.0'
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.11.2'
-    testImplementation group: 'org.mockito', name: 'mockito-inline', version: '3.11.2'
-    testImplementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.22'
-    testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.9.0'
-    testImplementation 'org.hibernate:hibernate-core:6.2.7.Final'
-    testImplementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.15.Final'
-
-    testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+    testImplementation 'jakarta.platform:jakarta.jakartaee-api:11.0.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'org.testcontainers:junit-jupiter:1.21.4'
+    testImplementation 'org.testcontainers:mariadb:1.21.4'
+    testImplementation 'com.h2database:h2:2.4.240'
+    testImplementation 'org.mariadb.jdbc:mariadb-java-client:3.5.8'
+    testImplementation 'org.slf4j:slf4j-api:2.0.17'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.14.3'
+    testImplementation "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+    testImplementation 'org.hamcrest:hamcrest:3.0'
 }
